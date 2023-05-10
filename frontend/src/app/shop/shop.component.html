@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="store-flex" [hidden]="!isShowCandles">
+        <app-shop-item class="app-shop-item"
+            *ngFor="let c of candlesService.candles" 
+            [candle]="c"
+            (clickAddCartItem) = "addCartItem($event)"  
+        ></app-shop-item>
+    </div>
+    <app-cart 
+        [hidden]="isShowCandles"
+        [candles]="candlesService.candles"
+        [cartItems]="cartService.cartItems"
+        [sum]="cartService.summary"
+        (deleteEvent)="deleteCartItem($event)"
+        (countEvent)="updateCartItem($event)"
+        >
+    </app-cart>    
+</div>  

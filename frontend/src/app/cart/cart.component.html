@@ -1,0 +1,29 @@
+<h1 class="title">Корзина</h1>
+<h2 class='no-items'[hidden]="(cartItems?.length ?? 1) > 0">Вы пока ничего не добавили в корзину.</h2>
+<div class="cart-elements" [hidden]="(cartItems?.length ?? 1) === 0">
+    <div class="cart-items">
+        <app-cart-item
+            *ngFor="let item of cartItems" 
+            [candle]="getCandle(item)"
+            [cartItem]="item"
+            (deleteEvent)="deleteItem($event)"
+            (countEvent)="changeCount($event)"
+        ></app-cart-item>
+       
+ 
+    </div>
+    <div class="cart-payment">
+        <div class="cart-payment__info">
+            <p class="cart-payment__el">Общая стоимость</p>
+            <p class="cart-payment__el">{{sum}} ₽</p>
+        </div>  
+        <form class="form"> 
+            <input type="text" class="form__input" placeholder="адрес доставки" formControlName="adress">
+            <input type="text" class="form__input" placeholder="имя" formControlName="name">
+            <input type="text" class="form__input" placeholder="email" formControlName="email">
+            <app-button text="Оплатить"></app-button>
+        </form>
+    </div> 
+</div>
+
+

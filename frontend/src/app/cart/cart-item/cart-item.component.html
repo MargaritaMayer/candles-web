@@ -1,0 +1,17 @@
+<div class="cart-item">
+    <div class="cart-item-wrap">
+        <div class="wrap-img">
+            <img class="cart-item__img" src="{{candle?.img_path}}">
+        </div>
+        <div class="cart-item__info">
+            <p class="cart-item__title">Свеча {{candle?.title}}</p>
+            <p class="link" (click)="delete()">Удалить</p>
+        </div>
+    </div>
+    <p class="cart-item__info cart-item__price">{{candle?.price}} ₽/шт.</p>
+    <app-counter-wrapper 
+        (countEvent)="changeCount($event)"
+        class="cart-item__counter"
+        [count]="cartItem?.count ?? 1">
+    </app-counter-wrapper>
+</div>

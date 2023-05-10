@@ -1,0 +1,17 @@
+<div class="store-item">
+    <div class="wrap-img">
+        <img class="store-item__img" src="{{candle?.img_path}}">
+    </div>
+    <div class="store-item__info">
+        <p class="text store-item__head-text">Свеча {{candle?.title}}</p>
+        <p class="text store-item__add-info">цвет, аромат, фитиль на выбор</p>
+        <div class="store-item__in-cart">
+            <app-counter-wrapper
+            [count]="count"
+            (countEvent)="changeCount($event)"           
+            ></app-counter-wrapper>
+            <p class="text">{{candle?.price}} ₽</p>
+        </div>
+        <app-button (click)='hideCandles()' text="В корзину"></app-button>
+    </div>
+</div>
