@@ -1,8 +1,8 @@
 .form-wrapper{
-    width: 650px;
-    height: 250px;
+    width: 630px;
+    // height: 250px;
     margin: auto;
-    margin-top: 200px;
+    margin-top: 150px;
     background-color: white;
     box-shadow: 0 0.25rem 1.5rem #0000001f;
     padding: 50px;
@@ -23,7 +23,52 @@
 }
 .row{
     flex-grow: 1;
+    border-radius: 3px 0 0 3px;
 }
 .email-input{
+    height: 50px;
+    box-sizing: border-box;
     width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: inherit;
+}
+app-button { 
+    height: 50px;
+    font-size: 15px;
+    width: 100%;
+    border-radius: inherit;
+ }
+
+ .row_submit{
+    border-radius: 0 3px 3px 0;
+ }
+
+ .row_email{
+    flex-basis: 300px;
+    margin-right: 2px;
+ }
+ .row_submit{
+    flex-grow: 1;
+ }
+
+ .email-input:focus
+{
+    border: 1px solid #000;
+    outline-offset: 0px;
+    outline: none;
+}
+.form-create-account{
+    flex-direction: column;
+}
+
+.row-create-account {
+    flex-basis: auto;
+    margin-bottom: 20px;
+    border-radius: 3px;
+}
+.button-create-account{
+    width: 150px;
+    align-self: flex-end;
+    border-radius: 3px;
 }

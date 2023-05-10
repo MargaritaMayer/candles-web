@@ -1,14 +1,19 @@
-<div class="form-wrapper">
-    <form class="form" (submit)="submit()">
-        <p class="form-title form-text">Вход в аккаунт</p>
-        <p class="form-info form-text">Введите почту, чтобы войти или зарегистрироваться</p>
+<form class="form-wrapper" [formGroup]="form" (submit)="submit()">
+    <div class="form">
+        <p class="form-title form-text">{{titleText}}</p>
+        <p class="form-info form-text" [hidden]="isNewUser!==null">Введите почту, чтобы войти или зарегистрироваться</p>
         <div class="form-content">
-            <div class="row">
-                <input type="text" class="email-input" placeholder="Электронная почта" formControlName="email">
+            <div class="row row_email">
+                <input type="text" class="email-input" 
+                [placeholder]="emailInputPlaceholder" formControlName="email">
             </div>
-            <div class="row row_submit">
-                <app-button text="Продолжить"></app-button>
+            <div class="row" [hidden]="isNewUser!==true">
+                <input type="text" class="email-input" 
+                placeholder="Повторите пароль" formControlName="password">
+            </div>
+            <div class="row_submit">
+                <app-button [text]="buttonText"></app-button>
             </div>
         </div>
-    </form>
-</div>
+    </div>
+</form>

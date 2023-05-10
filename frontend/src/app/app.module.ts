@@ -16,8 +16,9 @@ import { ShopComponent } from './shop/shop.component';
 import { ErrorComponent } from './error/error.component';
 import { CartComponent } from './cart/cart.component';
 import { LoginComponent } from './login/login.component';
-import { LoginModule } from './error/error.module';
+import { ErrorModule } from './error/error.module';
 import { CounterWrapperModule } from './counter-wrapper/counter-wrapper.module';
+import { LoginModule } from './login/login.module';
 
 const appRoute: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},

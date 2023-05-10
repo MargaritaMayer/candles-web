@@ -15,4 +15,4 @@ import { ErrorComponent } from './error.component';
       ]
  })
 
-export class LoginModule { }
+export class ErrorModule { }
