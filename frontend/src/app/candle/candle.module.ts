@@ -1,26 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from './login.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from '../button/button.module';
 import { CounterWrapperModule } from '../counter-wrapper/counter-wrapper.module';
+import { CandleComponent } from './candle.component';
 import { RouteModule } from '../route/route.module';
+import { LoginModule } from '../login/login.module';
 
 @NgModule({
     declarations: [
-        LoginComponent
+        CandleComponent
     ],
     imports: [
         CommonModule,   
-        FormsModule,
-        ReactiveFormsModule,
-        ButtonModule,
-        CounterWrapperModule,
-        RouteModule
+        RouteModule,
+        LoginModule
     ],
     exports: [
-        LoginComponent,
+        CandleComponent,
       ]
  })
 
-export class LoginModule { }
+export class CandleModule { }

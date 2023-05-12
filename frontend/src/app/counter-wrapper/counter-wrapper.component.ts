@@ -1,8 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-counter-wrapper',
   templateUrl: './counter-wrapper.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+
   styleUrls: ['./counter-wrapper.component.less']
 })
 export class CounterWrapperComponent {

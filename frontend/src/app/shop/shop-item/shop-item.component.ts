@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Candle } from 'src/app/shared/interfaces/candle';
 import { CartItem } from 'src/app/shared/interfaces/cart-Item';
 
 @Component({
   selector: 'app-shop-item',
   templateUrl: './shop-item.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./shop-item.component.less']
 })
 export class ShopItemComponent {

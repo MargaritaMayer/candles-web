@@ -10,14 +10,6 @@ export class CartService{
     private _cartItems: CartItem[] = [];
     private _summary = 0;
 
-    public countryCurrency: Promise<void> = fetch("https://restcountries.com/v2/all").then(
-    response => {
-        if (!response.ok) { throw new Error(response.statusText) }
-        return response.json()
-        }).then(res => {
-        for (let i=0; i < res.length; i+=1) {
-            res[i] = {name: res[i].name, code: res[i].currencies ? res[i].currencies[0].symbol : ''}}});
-
    
 
     get cartItems(): CartItem[] {

@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-contacts',
+  templateUrl: './contacts.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.less']
+  styleUrls: ['./contacts.component.less']
 })
-export class AppComponent implements OnInit{
+export class ContactsComponent implements OnInit{
   constructor(
     private router: Router) {};
   ngOnInit(): void {

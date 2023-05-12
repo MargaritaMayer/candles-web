@@ -1,19 +1,27 @@
-<form class="form-wrapper" [formGroup]="form" (submit)="submit()">
-    <div class="form">
-        <p class="form-title form-text">{{titleText}}</p>
-        <p class="form-info form-text" [hidden]="isNewUser!==null">Введите почту, чтобы войти или зарегистрироваться</p>
-        <div class="form-content">
-            <div class="row row_email">
-                <input type="text" class="email-input" 
-                [placeholder]="emailInputPlaceholder" formControlName="email">
-            </div>
-            <div class="row" [hidden]="isNewUser!==true">
-                <input type="text" class="email-input" 
-                placeholder="Повторите пароль" formControlName="password">
-            </div>
-            <div class="row_submit">
+<app-route [name]="'Login'"></app-route>
+
+<form class="form" [formGroup]="form" (submit)="submit()">
+    <p class="form__title form__text">{{titleText}}</p>
+    <p class="form__info form__text" [hidden]="isNewUser">Войдите в аккаунт или зарегистрируйтесь</p>
+    <div class="form__content content">
+        <div class="content__row">
+            <input type="text" class="content__input" 
+            placeholder="Электронная почта" formControlName="email">
+        </div>
+        <div class="content__row">
+            <input type="text" class="content__input" 
+            [placeholder]="passwordPlaceholder" formControlName="password">
+        </div>
+        <div class="content__row" [hidden]="!isNewUser">
+            <input type="text" class="content__input" 
+            placeholder="Подтвердите пароль" formControlName="password2">
+        </div>
+        <div class="content__wrapper">
+            <p class="content__registration link"(click)="registration()">Регистрация</p>
+            <div class="content__row-submit">
                 <app-button [text]="buttonText"></app-button>
             </div>
         </div>
+        
     </div>
 </form>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { CartItem } from 'src/app/shared/interfaces/cart-Item';
 import { CandlesService } from 'src/app/shared/services/candles.service';
@@ -8,6 +8,7 @@ import { CartService } from 'src/app/shared/services/cart.service';
 @Component({
   selector: 'app-shop',
   templateUrl: './shop.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./shop.component.less'],
 })
 
