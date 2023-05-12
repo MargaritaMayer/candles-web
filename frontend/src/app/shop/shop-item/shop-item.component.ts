@@ -19,7 +19,7 @@ export class ShopItemComponent {
 
   public hideCandles(): void {    
     if (this.candle) {
-      this.clickAddCartItem.emit({candleId: this.candle.id, count: this.count});
+      this.clickAddCartItem.emit({id: '', idCandle: this.candle.id, count: this.count});
       this.count = 1;
     }
   } 

@@ -1,8 +1,8 @@
 export interface Candle {
-  id: number;
+  id: string;
   title: string;
   price: number;
-  img_path: string;
+  imgs: string[];
 }
 
 

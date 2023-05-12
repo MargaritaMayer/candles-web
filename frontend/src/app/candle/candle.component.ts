@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Candle } from '../shared/interfaces/candle';
 import { ActivatedRoute } from '@angular/router';
 import { CandlesService } from '../shared/services/candles.service';
@@ -6,23 +6,24 @@ import { CandlesService } from '../shared/services/candles.service';
 @Component({
   selector: 'app-candle',
   templateUrl: './candle.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./candle.component.less']
 })
 export class CandleComponent implements OnInit {
   
   // @Input()
-  // public candle : Candle | null = null;
-  public candleId : number | null = null;
+  public candle : Candle | null = null;
+  public idCandle : number | null = null;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    public candlesService: CandlesService,) { }
+    // public candlesService: CandlesService,
+    ) { }
 
   ngOnInit(): void {
-    this.candleId = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-    this.candlesService.initialize()
+    this.idCandle = Number(this.activatedRoute.snapshot.paramMap.get('id'));
 
+    // this.candle = this.candlesService.getCandleById(3) || null;
+    // this.candlesService.initialize()
    
   }
 

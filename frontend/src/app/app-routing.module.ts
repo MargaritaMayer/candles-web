@@ -17,7 +17,6 @@ const appRoute: Routes = [
   {path: 'shop', component: ShopComponent},
   {path: 'shop/:id', component: CandleComponent},
   {path: 'login', component: LoginComponent},
-  // {path: 'route', component: RouteComponent},
   {path: 'contacts', component: ContactsComponent},
   {path: 'faq', component: FaqComponent},
 

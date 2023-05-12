@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { CandlesApiService } from 'src/app/shared/services/candles-api.service';
-import { ICandlesApiServiceToken } from 'src/app/shared/interfaces/i-candles-api-service';
 import { HttpClientModule } from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ShopModule } from './shop/shop.module';
@@ -15,8 +13,14 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
+import { FaqModule } from './faq/faq.module';
+import { PageNotFoundModule } from './page-not-found/page-not-found.module';
 
-
+import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { RouterModule } from '@angular/router';
+import { getAuth, provideAuth } from '@angular/fire/auth';
 
 
 @NgModule({
@@ -36,12 +40,17 @@ import { AppRoutingModule } from './app-routing.module';
     LoginModule,
     CounterWrapperModule,
     AngularFireModule.initializeApp(environment.firebase),
-    // RouterModule
+    RouterModule,
+    FaqModule,
+    PageNotFoundModule,
+    provideAuth(() => getAuth()),
+    provideFirebaseApp(() => getApp()),
+    provideFirestore(() => getFirestore()),
+    AngularFirestoreModule,
 
 
   ],
   providers: [
-    {provide: ICandlesApiServiceToken, useClass: CandlesApiService}, 
   ],
   bootstrap: [AppComponent],
   

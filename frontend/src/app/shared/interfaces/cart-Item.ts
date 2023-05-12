@@ -1,5 +1,8 @@
 export interface CartItem {
-    candleId: number;
+    id: string;
+    idCandle: string;
     count: number;
+    color?: number;
+
   }
   

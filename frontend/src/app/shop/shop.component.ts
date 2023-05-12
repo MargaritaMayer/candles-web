@@ -39,12 +39,12 @@ export class ShopComponent implements OnInit {
     this.hideCandles();
   }
 
-  public deleteCartItem(id: number): void {
+  public deleteCartItem(id: string): void {
     this.cartService.deleteItem(id);
   } 
   
   public updateCartItem(cartItem: CartItem){
-    this.cartService.updateCount(cartItem);
+    this.cartService.updateCount(cartItem.id, cartItem.count);
   } 
  
 }

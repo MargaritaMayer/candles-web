@@ -1,6 +1,9 @@
 <app-route [name]="'Candles'"></app-route>
 <div class="container link">
     <div class="store-flex" [hidden]="!isShowCandles">
+
+        <p >{{candlesService.candles.length}}</p>
+        
         <app-shop-item class="app-shop-item"
             *ngFor="let c of candlesService.candles" 
             [candle]="c"

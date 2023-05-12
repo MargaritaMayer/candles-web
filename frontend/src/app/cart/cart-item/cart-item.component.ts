@@ -16,20 +16,22 @@ export class CartItemComponent {
   public candle : Candle | undefined = undefined;
 
   @Output()
-  public deleteEvent = new EventEmitter<number>();
+  public deleteEvent = new EventEmitter<string>();
 
   @Output()
   public countEvent = new EventEmitter<CartItem>();
 
   delete(): void {
     if (this.cartItem){
-      this.deleteEvent.emit(this.cartItem.candleId);
+      this.deleteEvent.emit(this.cartItem.idCandle);
     }
   }  
 
   changeCount(count: number){
     if (this.cartItem){
-      this.countEvent.emit({candleId: this.cartItem.candleId, count: count});
+      this.countEvent.emit(
+        {id: this.cartItem.id, idCandle: this.cartItem.idCandle, 
+          count: count, color: this.cartItem.color});
     }
   }
 }
