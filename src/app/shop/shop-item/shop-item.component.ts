@@ -20,10 +20,18 @@ export class ShopItemComponent {
   public clickAddCartItem = new EventEmitter<CartItem>();  
 
   public hideCandles(): void {  
-    if (this.candle) {
-      this.clickAddCartItem.emit({id: '', idCandle: this.candle.id, count: this.count});
-      this.count = 1;
-    }
+    // if (this.candle) {
+    //   this.clickAddCartItem.emit({
+    //     "id": '', 
+    //     "idCandle": this.candle.id, 
+    //     "count": this.count,
+    //     "wick": data.wick,
+    //     "scent": data.scent,
+    //     "packaging": data.packaging,
+      
+    //   });
+    //   this.count = 1;
+    // }
   } 
 
   public showCandle(): void {

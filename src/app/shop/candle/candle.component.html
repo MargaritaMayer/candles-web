@@ -3,26 +3,55 @@
 
 <div class="candle central-container"> 
     <div class="candle__imgs wrap-img"> 
-        <!-- <img class="candle__main-img candle__img" src={{candle!.imgs[0]}}> -->
-        <img class="candle__main-img candle__img" src='assets/img/store-item-1.jpg'>
+        <img class="candle__main-img candle__img" src={{candle!.imgs[0]}}>
+        <!-- <img class="candle__main-img candle__img" src='assets/img/store-item-1.jpg'> -->
         <div class="candle__add-imgs" >
-            <!-- <div class="wrap-img candle__add-img link" *ngFor="let item of [].constructor(candle?.imgs?.length); let i = index">
+            <div class="wrap-img candle__add-img link" *ngFor="let item of [].constructor(candle?.imgs?.length); let i = index">
                 <img class="candle__img" src={{candle!.imgs[i]}}>
-            </div> -->
-
+            </div>
+<!-- 
             <div class="wrap-img candle__add-img link" *ngFor="let item of [].constructor(candle?.imgs?.length); let i = index">
                 <img class="candle__img" src='assets/img/store-item-1_1.jpg'>
             </div>
             <div class="wrap-img candle__add-img link" *ngFor="let item of [].constructor(candle?.imgs?.length); let i = index">
                 <img class="candle__img" src='assets/img/store-item-1_2.jpg'>
             </div>
-           
+            -->
             
         </div>
     </div>
     <div class="candle__info">   
         <h1 class="candle__title">{{candle?.title}}</h1>
-        <p>{{candle?.price}} ₽</p>
+        <h1 class="candle__title">CONGRATS CANDLE</h1>
+        <!-- <p>{{candle?.price}} ₽</p> -->
+        <p>2000 ₽</p>
+
+        <div>
+            <label for="wick">Фитиль</label>
+        </div>
+        <select class="select1" id="wick" name="carlist" form="carform">
+          <option value="opel">Хлопковый</option>
+          <option value="audi">Деревянный</option>
+        </select>
+
+        <div>
+            <label for="scent">Аромат</label>
+        </div>
+        <select class="select1" id="scent" name="carlist" form="carform">
+          <option value="opel">Лавандовое поле</option>
+          <option value="audi">Груша в карамели</option>
+          <option value="audi">Домашнее какао</option>
+          <option value="audi">Зеленый чай</option>
+        </select>
+
+        <div>
+            <label for="packaging">Упаковка</label>
+        </div>
+        <select class="select1" id="packaging" name="carlist" form="carform">
+          <option value="opel">Стандартная</option>
+          <option value="audi">Подарочная</option>
+        </select>
+
         <p>Свеча HYPE — это свеча конструктор, где вы можете выбрать цвет, аромат, надпись на свече и фитиль! Огонь? Огонь! Собери свое уникальное сочетание свечи!</p>
         <p>Свеча “I can Buy myself flowers” всегда есть в наличии:</p>
         <p>Розовая — Кожа и сандал — Хлопковый фитиль</p>
@@ -32,10 +61,136 @@
         <p>Зеленая — Мандарин и базилик — Хлопковый фитиль</p>
         <p>Голубая — Пич блоссом — Хлопковый фитиль</p>    
         <p>Ярко - розовая — Кашемировый уют — Хлопковый фитиль</p>
-            
-        <app-button class="button" text="В корзину" (click)="AddCartItem()"></app-button>
-            
         
+        <app-counter-wrapper 
+          (countEvent)="changeCount($event)"
+          class="cart-item__counter"
+          [count]="count">
+      </app-counter-wrapper>
+        <app-button class="button" text="В корзину" (click)="AddCartItem()"></app-button>
     </div>
     
 </div> 
+<!-- 
+<div class="central-container">
+  <p class="my-collapse-p">
+    <a class="btn btn-primary my-collapse" data-bs-toggle="collapse" 
+    role="button" aria-expanded="false" aria-controls="collapseExample" href="#collapseExample">
+    Все ароматы по нотам</a>
+  </p>
+  <div class="collapse" id="collapseExample">
+    <div class="card card-body">
+      <img src="assets/img/candle-collapse-1.png" alt="">
+    </div>
+  </div>
+
+  <p class="my-collapse-p">
+    <a class="btn btn-primary my-collapse" data-bs-toggle="collapse" 
+    role="button" aria-expanded="false" aria-controls="collapseExample" href="#collapseExample1">
+    <span>Доставка</span></a>
+  </p>
+  <div class="collapse" id="collapseExample1">
+    <div class="card card-body">
+      <p>Кастомные свечи HYPE мы изготавливаем на заказ. Изготовление занимает до 4 рабочих дней. 
+        Однако, в коллекции HYPE в наличии всегда есть определенные сочетания цвета и аромата. 
+        Они указаны в описании товара. Если вам необходимо, чтобы заказ был срочно отправлен - пожалуйста, напишите об 
+        этом в комментариях к заказу при оформлении, мы предложим варианты.
+      </p>
+      <p>
+        Доставка по Москве
+      </p>
+      <p>
+      По Москве возможна курьерская доставка: 450 руб - в пределах 3 кольца и 550 руб - в пределах МКАД. 
+      Или доставка СДЭК: курьерская или до ближайшего к вам пункта выдачи.
+      </p>
+      <p>
+        Доставка по России
+      </p>
+      <p>
+        Мы отправляем ваши заказы по всей стране курьерской доставкой СДЭК. Выберите удобный адрес склада или введите 
+        адрес доставки до двери.
+      </p>
+      <p>
+        Доставка в другие страны
+      </p>
+      <p>
+        Мы также отправляем свечи по всему миру. Стоимость такой доставки рассчитывается отдельно после оформления и 
+        оплаты заказа. Выберите пункт “Доставка в другую страну” в процессе оформления заказа и мы оперативно свяжемся с
+         вами после оплаты!
+      </p>
+    </div>
+  </div>
+  
+</div> -->
+
+<div class="central-container">
+  <div class="my-border">
+      <p class="my-collapse-p">
+          <a class="btn btn-primary my-collapse " data-bs-toggle="collapse" 
+          role="button" aria-expanded="false" aria-controls="collapseExample" href="#collapseExample">
+          Все ароматы по нотам</a>
+        </p>
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body">
+            <img src="assets/img/candle-collapse-1.png" alt="">
+
+          </div>
+        </div>
+  </div>
+  
+  <div class="my-border-bottom">
+      <p class="my-collapse-p">
+          <a class="btn btn-primary my-collapse" data-bs-toggle="collapse" 
+          role="button" aria-expanded="false" aria-controls="collapseExample" href="#collapseExample1">
+          Доставка</a>
+      </p>
+      <div class="collapse" id="collapseExample1">
+          <div class="card card-body">
+            <p>Кастомные свечи HYPE мы изготавливаем на заказ. Изготовление занимает до 4 рабочих дней. 
+              Однако, в коллекции HYPE в наличии всегда есть определенные сочетания цвета и аромата. 
+              Они указаны в описании товара. Если вам необходимо, чтобы заказ был срочно отправлен - пожалуйста, напишите об 
+              этом в комментариях к заказу при оформлении, мы предложим варианты.
+            </p>
+            <p>
+              Доставка по Москве
+            </p>
+            <p>
+            По Москве возможна курьерская доставка: 450 руб - в пределах 3 кольца и 550 руб - в пределах МКАД. 
+            Или доставка СДЭК: курьерская или до ближайшего к вам пункта выдачи.
+            </p>
+            <p>
+              Доставка по России
+            </p>
+            <p>
+              Мы отправляем ваши заказы по всей стране курьерской доставкой СДЭК. Выберите удобный адрес склада или введите 
+              адрес доставки до двери.
+            </p>
+            <p>
+              Доставка в другие страны
+            </p>
+            <p>
+              Мы также отправляем свечи по всему миру. Стоимость такой доставки рассчитывается отдельно после оформления и 
+              оплаты заказа. Выберите пункт “Доставка в другую страну” в процессе оформления заказа и мы оперативно свяжемся с
+               вами после оплаты!
+            </p>
+          </div>
+      </div>
+  </div>
+  
+
+
+
+</div>  
+
+
+
+
+  <!-- <div class="other-candles">
+    <app-shop-item class="app-shop-item"
+            *ngFor="let c of candlesService.candles" 
+            [candle]="c"
+            (clickAddCartItem) = "addCartItem($event)"  
+    ></app-shop-item>
+</div> -->
+
+<div class="place"></div>

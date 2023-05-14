@@ -22,6 +22,8 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { RouterModule } from '@angular/router';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { CandleModule } from './shop/candle/candle.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ContactsModule } from './contacts/contacts.module';
 
 
 @NgModule({
@@ -49,6 +51,8 @@ import { CandleModule } from './shop/candle/candle.module';
     provideFirestore(() => getFirestore()),
     AngularFirestoreModule,
     CandleModule,
+    // NgbModule,
+    ContactsModule,
 
 
   ],

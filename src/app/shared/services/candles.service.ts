@@ -14,7 +14,8 @@ export class CandlesService{
     private  _isLoading$ = new BehaviorSubject(true);
       
     public get candles(): Candle[] {
-        this.initialize();
+        // console.log("candles")
+        // this.initialize();
         return this._candles;
     }
 
@@ -24,17 +25,17 @@ export class CandlesService{
 
     async initialize() {
         console.log("was here");
-        // const collection = this.store.collection('/candles');
-        // const documentStream = await lastValueFrom(collection.get());
-        // const res: Candle[] = [];
-        // documentStream.forEach((d) => {
-        // const data: any = d.data();
-        // res.push({"id": d.id, "title": data.title, "price": data.price, "imgs": data.imgs});
-        // });
-        // this._candles = [];
-        // res.forEach((d) => { if (d) {
-        //     this._candles.push(d);
-        // }});
+        const collection = this.store.collection('/candles');
+        const documentStream = await lastValueFrom(collection.get());
+        const res: Candle[] = [];
+        documentStream.forEach((d) => {
+        const data: any = d.data();
+        res.push({"id": d.id, "title": data.title, "price": data.price, "imgs": data.imgs});
+        });
+        this._candles = [];
+        res.forEach((d) => { if (d) {
+            this._candles.push(d);
+        }});
         this._isLoading$.next(false);
     }
 

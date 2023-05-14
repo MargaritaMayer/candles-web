@@ -1,12 +1,17 @@
 <app-route [name]="'Корзина'"></app-route>
-<div class="cart-wrapper">
-    <h1 class="title">Корзина</h1>
-    <h2 class='no-items'[hidden]="(cartItems?.length ?? 1) > 0">Вы пока ничего не добавили в корзину.</h2>
+
+<div [hidden]="!(isLoading | async)" class="loader">
+    <div  class="lds-ring" ><div></div><div></div><div></div><div></div></div>
 </div>
-    <div class="cart-elements" [hidden]="(cartItems?.length ?? 1) === 0">
+<div [hidden]="isLoading | async">
+    <div class="cart-wrapper">
+        <h1 class="title">Корзина</h1>
+        <h2 class='no-items'[hidden]="(cartService.cartItems.length) > 0">Вы пока ничего не добавили в корзину.</h2>
+    </div>
+    <div class="cart-elements" [hidden]="(cartService.cartItems.length) === 0">
         <div class="cart-items">
             <app-cart-item
-                *ngFor="let item of cartItems" 
+                *ngFor="let item of cartService.cartItems" 
                 [candle]="getCandle(item)"
                 [cartItem]="item"
                 (deleteEvent)="deleteItem($event)"
@@ -28,3 +33,6 @@
             </form>
         </div> 
     </div>    
+
+</div>
+   

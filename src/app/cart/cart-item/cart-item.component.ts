@@ -30,8 +30,13 @@ export class CartItemComponent {
   changeCount(count: number){
     if (this.cartItem){
       this.countEvent.emit(
-        {id: this.cartItem.id, idCandle: this.cartItem.idCandle, 
-          count: count, color: this.cartItem.color});
+        {"id": this.cartItem.id, 
+          "idCandle": this.cartItem.idCandle, 
+          "count": count, 
+          "wick": this.cartItem.wick,
+          "scent": this.cartItem.scent,
+          "packaging": this.cartItem.packaging,
+        });
     }
   }
 }

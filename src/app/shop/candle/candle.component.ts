@@ -12,11 +12,16 @@ import { CartService } from 'src/app/shared/services/cart.service';
   styleUrls: ['./candle.component.less']
 })
 export class CandleComponent implements OnInit {
-  
+
+
+
+
   public candle : Candle | null = null;
   public id : string | null = null;
   public count = 1;
   public color = 2;
+
+  private collapses = new Map<string, boolean>(); 
   
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -35,22 +40,40 @@ export class CandleComponent implements OnInit {
         this.router.navigate(['shop/' + this.candle?.id]); 
 
       }
-    }   
+    }  
+  }
+
+  public ShowCollapse(id: string) {
+   
   }
 
   public showAddImg(id: number) {
   }
 
   public AddCartItem() {
+    const selectWick = <HTMLSelectElement>document.getElementById('wick');
+    const wick = selectWick.options[selectWick.selectedIndex].text;
+
+    const selectScent = <HTMLSelectElement>document.getElementById('scent');
+    const scent = selectScent.options[selectScent.selectedIndex].text;
+
+    const selectPackaging = <HTMLSelectElement>document.getElementById('packaging');
+    const packaging = selectPackaging.options[selectPackaging.selectedIndex].text;
+
     const cartItem: CartItem = {
       'id': '', 
       'idCandle': this.id || '', 
       'count': this.count,
-      'color': this.color
+      'wick': wick,
+      'scent': scent,
+      'packaging': packaging,
     }
-    this.cartService.addCartItem(cartItem);
+    console.log(cartItem);
+    // this.cartService.addCartItem(cartItem);
 
   }
  
-
+  changeCount(count: number){
+    this.count = count;
+  }
 }

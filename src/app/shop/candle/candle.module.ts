@@ -5,6 +5,8 @@ import { CounterWrapperModule } from '../../counter-wrapper/counter-wrapper.modu
 import { CandleComponent } from './candle.component';
 import { RouteModule } from '../../route/route.module';
 import { LoginModule } from '../../login/login.module';
+import { ShopItemModule } from '../shop-item/shop-item.module';
+import { NgbCollapseModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     declarations: [
@@ -14,7 +16,11 @@ import { LoginModule } from '../../login/login.module';
         CommonModule,   
         RouteModule,
         LoginModule,
-        ButtonModule
+        ButtonModule,
+        ShopItemModule,
+        NgbModule,
+        NgbCollapseModule,
+        CounterWrapperModule
     ],
     exports: [
         CandleComponent,

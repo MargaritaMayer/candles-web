@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
 import { Candle } from 'src/app/shared/interfaces/candle';
 import { CartItem } from 'src/app/shared/interfaces/cart-item';
 import { CartService } from '../shared/services/cart.service';
+import { AuthService } from '../shared/services/auth.service';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-cart',
@@ -11,11 +13,17 @@ import { CartService } from '../shared/services/cart.service';
 })
 export class CartComponent implements OnInit {
 
-  constructor(    public cartService: CartService) {}
+  constructor(    public cartService: CartService,
+    private auth: AuthService,
+    private store: AngularFirestore, ) {}
+
+  public get isLoading() {
+    return this.cartService.isLoading.asObservable();
+  }
   ngOnInit(): void {
     this.cartService.initialize();
+    console.log(this.cartService.cartItems)
   }
-  
   @Input()
   public cartItems: CartItem[] | null = [];
 

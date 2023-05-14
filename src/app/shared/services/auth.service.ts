@@ -8,7 +8,9 @@ export class AuthService {
   public currentUser: UserCredential | null = null
 
 
-  constructor(private auth: Auth, private router: Router) { }
+  constructor(private auth: Auth, private router: Router) {
+    this.auth.onAuthStateChanged((...a) => console.log(a));
+  }
 
   public my_login(username: string, password: string): Promise<UserCredential> {
     return signInWithEmailAndPassword(this.auth, username, password);

@@ -20,6 +20,7 @@ export class AppComponent implements OnInit{
 
   constructor(public candlesService: CandlesService){}
   ngOnInit(): void {
+    console.log("AppComponent ngOnInit")
     this.candlesService.initialize();
   }
   // item$: Observable<Candle[]>;
