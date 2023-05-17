@@ -28,21 +28,9 @@
   
   ### Quick start
 
-1. Start database
+1. Run frontend
 
    ```bash
-   cd database; docker-compose up
-   ```
-
-2. Install and run backend
-
-   ```bash
-   cd backend; npm install; npm run start
-   ```
-
-3. Run frontend
-
-   ```bash
-   cd frontend; npm install; ng serve
+ npm install; ng serve
    ```
   
