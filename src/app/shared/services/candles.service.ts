@@ -4,40 +4,49 @@ import { Firestore, collectionData, collection, CollectionReference, DocumentDat
 import { Observable, lastValueFrom } from "rxjs";
 import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/compat/firestore";
 import { BehaviorSubject } from 'rxjs';
+import { CartItem } from "../interfaces/cart-item";
 
 @Injectable({providedIn: 'root'})
 export class CandlesService{
 
     constructor(private store: AngularFirestore) {}
-    
-    private _candles: Candle[] = [];
-    private  _isLoading$ = new BehaviorSubject(true);
-      
-    public get candles(): Candle[] {
-        // this.initialize();
+
+    private _candles: Promise<Candle[]> | null = null;
+    private _summary: number = 0;
+
+
+    public get candles(): Promise<Candle[]> {
+        if (this._candles !== null) return this._candles;
+        this._candles = this._loadCandles();
         return this._candles;
     }
 
-    public get isLoading(): BehaviorSubject<boolean> {
-        return this._isLoading$;
-    }
-
-    async initialize() {
+    async _loadCandles(): Promise<Candle[]> {
         const collection = this.store.collection('/candles');
         const documentStream = await lastValueFrom(collection.get());
         const res: Candle[] = [];
         documentStream.forEach((d) => {
-        const data: any = d.data();
-        res.push({"id": d.id, "title": data.title, "price": data.price, "imgs": data.imgs, 'isAvailable': data.isAvailable});
+            const data: any = d.data();
+            res.push({"id": d.id, "title": data.title, "price": data.price, "imgs": data.imgs, 'isAvailable': data.isAvailable});
         });
-        this._candles = [];
+        // console.log(res);
+        const candles: Candle[] = [];
         res.forEach((d) => { if (d) {
-            this._candles.push(d);
+            candles.push(d);
         }});
-        this._isLoading$.next(false);
+        return candles;
     }
 
-    public getCandleById(id: string): Candle | undefined {
-        return this._candles.find(c => c.id === id);
+    initialize() {
+        this._candles = this._loadCandles();
     }
+
+    public async calculateCartSum(cartItems: CartItem[]) {
+        const candles = await this.candles;
+        this._summary = cartItems.reduce((sum, cartItem) => {
+            const price = candles.find(c => c.id === cartItem.idCandle)?.price ?? 0;
+            return price*cartItem.count + sum;
+        }, 0);
+        return this._summary;
+    } 
 }

@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angul
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CartItem } from '../shared/interfaces/cart-item';
 import { AuthService } from '../shared/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,10 @@ import { AuthService } from '../shared/services/auth.service';
 })
 
 export class LoginComponent {
-  constructor( private auth: AuthService) { }
+  constructor( 
+    private auth: AuthService, 
+    private router: Router, 
+    ) { }
 
   public isNewUser: boolean = false;
   public titleText = "Вход в THE CANDLES";
@@ -42,6 +46,7 @@ export class LoginComponent {
       } else {  
         this.auth.login(formData.email, formData.password);
         console.log("Вы зашли в аккаунт")
+        this.router.navigate(['/home']); 
       }
     }
  

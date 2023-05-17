@@ -1,9 +1,9 @@
 <app-route [name]="'Свечи'"></app-route>
 
-<div [hidden]="!(isLoading | async)" class="loader">
+<div [hidden]='candles!==null' class="loader">
     <div  class="lds-ring" ><div></div><div></div><div></div><div></div></div>
 </div>
-<div class="shop" [hidden]="(isLoading | async)">
+<div class="shop" [hidden]='candles===null'>
     <div class="filter">
         <div>
             <input type="checkbox" id="scales" name="scales" (click)="showAvailableCandles()">
@@ -36,7 +36,7 @@
         </div>
     </div>  
 
-    <div class="container link" [hidden]="(isLoading | async) || !isShowAvailableCandles">
+    <div class="container link" [hidden]="!isShowAvailableCandles">
         <div class="shop-flex" [hidden]="!isShowCandles">        
             <app-shop-item class="app-shop-item"
                 *ngFor="let c of candlesAvailable" 

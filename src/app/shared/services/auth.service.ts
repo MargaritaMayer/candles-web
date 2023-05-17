@@ -1,23 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Auth, UserCredential, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { Auth, UserCredential, signInWithEmailAndPassword, Persistence, browserSessionPersistence, browserLocalPersistence } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { CartService } from './cart.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Injectable({ providedIn: 'root'})
 export class AuthService {
-  public currentUser: UserCredential | null = null
+  // public currentUser: UserCredential | null = null
+  public currentUser: BehaviorSubject<UserCredential | null> = new BehaviorSubject<UserCredential | null>(null);
 
 
   constructor(
     private auth: Auth, 
     private router: Router, 
-    // private cartService: CartService,
     private fireauth: AngularFireAuth,
-    ) {
-    // this.auth.onAuthStateChanged((...a) => console.log(a));
-  }
+    ) {}
 
   public my_login(username: string, password: string): Promise<UserCredential> {
     return signInWithEmailAndPassword(this.auth, username, password);
@@ -25,12 +24,11 @@ export class AuthService {
 
   async login(email: string, password: string) {
     try{
-      this.currentUser = await this.my_login(email, password);
-      
-      localStorage.setItem('token', 'true');
-      // this.cartService.initialize();
+      this.currentUser.next(await this.my_login(email, password));
 
-      // this.router.navigate(['faq']); 
+      localStorage.setItem('token', 'true');
+
+      // this.router.navigate(['/home']); 
     }  catch(error){
       alert("Something went wrong in login");
       this.router.navigate(['/login']);

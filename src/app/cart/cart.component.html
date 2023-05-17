@@ -1,37 +1,46 @@
 <app-route [name]="'Корзина'"></app-route>
-<div [hidden]="!(isLoading | async)" class="loader">
-    <div  class="lds-ring" ><div></div><div></div><div></div><div></div></div>
-</div>
-<div [hidden]="isLoading | async">
-    <div class="cart-wrapper">
-        <h1 class="title">Корзина</h1>
-        <h2 class='no-items'[hidden]="(cartService.cartItems.length) > 0">Вы пока ничего не добавили в корзину.</h2>
-    </div>
-    <div class="cart-elements" [hidden]="(cartService.cartItems.length) === 0">
-        <div class="cart-items">
-            <app-cart-item
-                *ngFor="let item of cartService.cartItems" 
-                [candle]="getCandle(item)"
-                [cartItem]="item"
-                (deleteEvent)="deleteItem($event)"
-                (countEvent)="changeCount($event)"
-            ></app-cart-item>
-           
-     
-        </div>
-        <div class="cart-payment">
-            <div class="cart-payment__info">
-                <p class="cart-payment__el">Общая стоимость</p>
-                <p class="cart-payment__el">{{cartService.summary}} ₽</p>
-            </div>  
-            <form class="form"> 
-                <input type="text" class="form__input" placeholder="адрес доставки" formControlName="adress">
-                <input type="text" class="form__input" placeholder="имя" formControlName="name">
-                <input type="text" class="form__input" placeholder="email" formControlName="email">
-                <app-button class="button" text="Оплатить"></app-button>
-            </form>
-        </div> 
-    </div>    
 
+<div [hidden]="isAuth">
+    <h1>Вы не авторизованы</h1>
+    <p>Для доступа к личному кабинету необходимо <a routerLink="/login" class="link">войти</a></p>
 </div>
+<div [hidden]="!isAuth">
+    <div [hidden]="!(isLoading | async)" class="loader">
+        <div  class="lds-ring" ><div></div><div></div><div></div><div></div></div>
+    </div>
+    
+    <div [hidden]="isLoading | async">
+        <div class="cart-wrapper">
+            <h1 class="title">Корзина</h1>
+            <h2 class='no-items'>Вы пока ничего не добавили в корзину.</h2>
+        </div>
+        <div class="cart-elements">
+            <div class="cart-items">
+                <app-cart-item
+                    *ngFor="let item of cartItems" 
+                    [candle]="getCandle(item)"
+                    [cartItem]="item"
+                    (deleteEvent)="deleteItem($event)"
+                    (countEvent)="changeCount($event)"
+                ></app-cart-item>
+               
+         
+            </div>
+            <div class="cart-payment">
+                <div class="cart-payment__info">
+                    <p class="cart-payment__el">Общая стоимость</p>
+                    <p class="cart-payment__el">{{summary}} ₽</p>
+                </div>  
+                <form class="form"> 
+                    <input type="text" class="form__input" placeholder="адрес доставки" formControlName="adress">
+                    <input type="text" class="form__input" placeholder="имя" formControlName="name">
+                    <input type="text" class="form__input" placeholder="email" formControlName="email">
+                    <app-button class="button" text="Оплатить"></app-button>
+                </form>
+            </div> 
+        </div>    
+    
+    </div>
+</div>
+
    

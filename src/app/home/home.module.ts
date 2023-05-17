@@ -3,6 +3,7 @@ import { HomeComponent } from './home.component';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from '../button/button.module';
 import { CounterWrapperModule } from '../counter-wrapper/counter-wrapper.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     declarations: [
@@ -12,6 +13,7 @@ import { CounterWrapperModule } from '../counter-wrapper/counter-wrapper.module'
         CommonModule,   
         ButtonModule,
         CounterWrapperModule,
+        RouterModule,
     ],
     exports: [
         HomeComponent,

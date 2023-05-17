@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonModule } from '../button/button.module';
 import { CartItemModule } from './cart-item/cart-item.module';
 import { RouteModule } from '../route/route.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     declarations: [
@@ -12,6 +13,7 @@ import { RouteModule } from '../route/route.module';
     imports: [
         CommonModule, 
         RouteModule,
+        RouterModule,
         CartItemModule,
         ButtonModule,  
     ],

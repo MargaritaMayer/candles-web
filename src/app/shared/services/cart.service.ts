@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { CandlesService } from "./candles.service";
 import { CartItem } from "../interfaces/cart-item";
 import { AngularFirestore } from "@angular/fire/compat/firestore";
-import { BehaviorSubject, lastValueFrom } from "rxjs";
+import { BehaviorSubject, Observable, lastValueFrom } from "rxjs";
 import { AuthService } from "./auth.service";
 import { Auth, signInWithEmailAndPassword } from "@angular/fire/auth";
 // import { AuthService } from "./auth.service";
@@ -10,35 +10,40 @@ import { Auth, signInWithEmailAndPassword } from "@angular/fire/auth";
   
 @Injectable({providedIn: 'root'})
 export class CartService{
-    constructor(public candlesService: CandlesService,
+    constructor( 
         private store: AngularFirestore,
-        private auth: AuthService,
-        
-        ) {}
+        private auth: AuthService
+    ) {
+        this.auth.currentUser.subscribe((currentUser) => {
+            if (!currentUser) return;
+            this._userId = currentUser.user.uid;
+            this.initialize();
+        })
+    }
+    private _userId: String | null = null;
 
-    private _cartItems: CartItem[] = [];
-    private _summary = 0;   
-    private  _isLoading$ = new BehaviorSubject(true);
 
-    public get cartItems(): CartItem[] {
+    private _cartItems = new BehaviorSubject<CartItem[] | null>(null);
+    
+    private _cartItemsPromise: Promise<CartItem[]> | null = null;
+
+    private get cartItemsPromise(): Promise<CartItem[]> {
+        if (this._cartItemsPromise !== null) return this._cartItemsPromise;
+        this._cartItemsPromise = this._loadCartItems();
+        return this._cartItemsPromise;
+    }
+    
+    public get cartItems(): Observable<CartItem[] | null> {
         return this._cartItems;
     }
 
-    public get summary(): number {
-        return this._summary;
-    }
-
-    public get isLoading(): BehaviorSubject<boolean> {
-        return this._isLoading$;
-    }
-
-    async initialize() {
-        const collection = this.store.collection(`/users/ofPmqALnSZSqo0ZXigKCKlyNNhh1/cart`);
+    async _loadCartItems(): Promise<CartItem[]> {
+        const collection = this.store.collection(`/users/${this._userId}/cart`);
         const documentStream = await lastValueFrom(collection.get());
-        const cartItems: CartItem[] = [];
+        const res: CartItem[] = [];
         documentStream.forEach((d) => {
             const data: any = d.data();
-            cartItems.push({
+            res.push({
                 "id": d.id, 
                 "idCandle": data.idCandle, 
                 "count": data.count, 
@@ -47,52 +52,51 @@ export class CartService{
                 "packaging": data.packaging,
             });
         });
-        this._cartItems = [];
-        cartItems.forEach((d) => { if (d) {
-            this.cartItems.push(d);
+        const cartItems: CartItem[] = [];
+
+        res.forEach((d) => { if (d) {
+            cartItems.push(d);
         }});
-        this.updateSummary()
-        this._isLoading$.next(false);
-    }
-    
-    private updateSummary(): void {
-        
-        this._summary = this._cartItems.reduce((sum, cartItem) => 
-            (this.candlesService.getCandleById(cartItem.idCandle)?.price ?? 0)
-            *cartItem.count + sum, 0);
-        console.log(this._summary)
+        this._cartItems.next(cartItems);
+        return cartItems;
     }
 
-    public addCartItem(item: CartItem): void {
-        
-        const cartItem: CartItem | undefined = this._cartItems.find(i => 
+    initialize() {
+        this._cartItemsPromise = this._loadCartItems();
+    }
+
+
+
+    async addCartItem(item: CartItem) {
+        const cartItems: CartItem[] = await this.cartItemsPromise;
+        const cartItem: CartItem | null = cartItems.find(i => 
             i.idCandle == item.idCandle && 
             i.wick === item.wick &&
             i.scent === item.scent &&
             i.packaging === item.packaging
-        )
+        ) || null;
       
-        if (cartItem) { this.updateCount(cartItem.id, item.count+cartItem.count) }
-        else { 
-            this.store.collection(`/users/${this.auth.currentUser?.user.uid}/cart`).add({
+        if (cartItem) { 
+            await this.updateCount(cartItem.id, item.count+cartItem.count) }
+        else {
+            await this.store.collection(`/users/${this._userId}/cart`).add({
                 "idCandle": item.idCandle, 
                 "count": item.count,
                 "wick": item.wick,
                 "scent": item.scent,
                 "packaging": item.packaging,
             });
-        
             this.initialize();  
         }
     }
 
-    public deleteItem(id: string): void {
-        this.store.collection(`/users/${this.auth.currentUser?.user.uid}/cart`).doc(id).delete();
+    public async deleteItem(id: string): Promise<void> {
+        await this.store.collection(`/users/${this._userId}/cart`).doc(id).delete();
         this.initialize(); 
     }
 
-    public updateCount(id: string, count: number): void {
-        this.store.collection(`/users/${this.auth.currentUser?.user.uid}/cart`).doc(id).update({"count": count});
+    public async updateCount(id: string, count: number): Promise<void> {
+        await this.store.collection(`/users/${this._userId}/cart`).doc(id).update({"count": count});
         this.initialize();
     }
 }

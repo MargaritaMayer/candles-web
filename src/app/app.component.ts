@@ -7,6 +7,7 @@ import { authState } from '@angular/fire/auth';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { CandlesService } from './shared/services/candles.service';
+import { CartService } from './shared/services/cart.service';
 
 @Component({
   selector: 'app-root',
@@ -17,9 +18,11 @@ import { CandlesService } from './shared/services/candles.service';
 })
 export class AppComponent implements OnInit{
 
-  constructor(public candlesService: CandlesService){}
+  constructor(public candlesService: CandlesService,
+    public cartService: CartService){}
   ngOnInit(): void {
     this.candlesService.initialize();
+    // this.cartService.initialize();
   }
   // item$: Observable<Candle[]>;
   

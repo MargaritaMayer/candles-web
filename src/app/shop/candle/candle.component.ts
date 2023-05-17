@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Candle } from '../../shared/interfaces/candle';
 import { CartItem } from '../../shared/interfaces/cart-item';
 
@@ -13,34 +13,36 @@ import { CartService } from 'src/app/shared/services/cart.service';
 })
 export class CandleComponent implements OnInit {
 
-
-
-
-  public candle : Candle | null = null;
-  public id : string | null = null;
+  public _candle : Candle | null = null;
   public count = 1;
   public color = 2;
-
-  private collapses = new Map<string, boolean>(); 
   
   constructor(
     private activatedRoute: ActivatedRoute,
     public candlesService: CandlesService,
     public cartService: CartService,
-    private router: Router
+    private router: Router,
+    private changeDetectorRef: ChangeDetectorRef
+
     ) { }
 
-  ngOnInit(): void {
-    this.id = this.activatedRoute.snapshot.paramMap.get('id');
-    if (this.id){
-      if (this.candlesService.getCandleById(this.id)) {
-        this.candle = this.candlesService.getCandleById(this.id)!;
-      }
-      else {
-        this.router.navigate(['shop/' + this.candle?.id]); 
+  public get candle() {
+    return this._candle;
+  }
 
-      }
-    }  
+  async ngOnInit(): Promise<void> {
+    
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    
+    if (id){
+      const candles = await this.candlesService.candles;
+      this._candle = candles.find(c => c.id === id) || null;
+      if (this._candle===null){
+        this.router.navigate(['/error']);
+      }      
+    } 
+    this.changeDetectorRef.detectChanges();
+
   }
 
   public ShowCollapse(id: string) {
@@ -51,6 +53,7 @@ export class CandleComponent implements OnInit {
   }
 
   public AddCartItem() {
+    if (!this._candle) return;
     const selectWick = <HTMLSelectElement>document.getElementById('wick');
     const wick = selectWick.options[selectWick.selectedIndex].text;
 
@@ -62,7 +65,7 @@ export class CandleComponent implements OnInit {
 
     const cartItem: CartItem = {
       'id': '', 
-      'idCandle': this.id || '', 
+      'idCandle': this._candle.id || '', 
       'count': this.count,
       'wick': wick,
       'scent': scent,

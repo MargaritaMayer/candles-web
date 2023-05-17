@@ -6,6 +6,7 @@ import { CandlesService } from 'src/app/shared/services/candles.service';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { Candle } from '../shared/interfaces/candle';
 
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-shop',
@@ -15,27 +16,32 @@ import { Candle } from '../shared/interfaces/candle';
 })
 
 
-export class ShopComponent {
+export class ShopComponent implements OnInit{
 
-  public candles: Candle[] = [];
-  public candlesAvailable: Candle[] = [];
+  private _candles: Candle[] | null = null;
   public isShowCandles = true;
+
+  public candlesAvailable: Candle[] = [];
   public isShowAvailableCandles = false;
   public popularCandles: Candle[] = [];
 
-  public get isLoading() {
-    this.candles = this.candlesService.candles;
-    this.candlesAvailable = this.candles.filter(c => c.isAvailable);
-    this.popularCandles = this.candlesService.candles;
-    return this.candlesService.isLoading.asObservable();
+  public get candles() {
+    return this._candles;
   }
 
   constructor(
     public candlesService: CandlesService,
     public cartService: CartService,
+    private changeDetectorRef: ChangeDetectorRef
   ) {}
-
-
+  async ngOnInit(): Promise<void>  {
+    this._candles = await this.candlesService.candles;
+    this._candles = [... this._candles];
+    this.candlesAvailable = this._candles.filter(c => c.isAvailable);
+    this.popularCandles = [... this._candles];
+    this.changeDetectorRef.detectChanges();
+    
+  }
 
   public showCandles(): void {
     this.isShowCandles = true;
@@ -62,16 +68,15 @@ export class ShopComponent {
   }
 
   public lowPriceCandle() {
-    this.candles = this.candles.sort((c1, c2) => c1.price-c2.price);
+    this._candles?.sort((c1, c2) => c1.price-c2.price);
   }
 
   public highPriceCandle() {
-    this.candles = this.candles.sort((c1, c2) => c2.price-c1.price);
+    this._candles?.sort((c1, c2) => c2.price-c1.price);
   }
 
   public popularCandle(){
-    console.log(this.popularCandles)
-    this.candles = this.popularCandles;
+    this._candles = [...this.popularCandles];
   }
  
 }

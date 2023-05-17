@@ -1,13 +1,16 @@
  <app-route [name]="candle?.title || ''" [isCandle]="true" ></app-route>
 
-
-<div class="candle central-container"> 
+ <div [hidden]='candle!==null' class="loader">
+  <div  class="lds-ring" ><div></div><div></div><div></div><div></div></div>
+</div>
+<div [hidden]='candle===null'>
+  <div  class="candle central-container"> 
     <div class="candle__imgs wrap-img"> 
-        <img class="candle__main-img candle__img" src={{candle!.imgs[0]}}>
+        <img *ngIf="candle" class="candle__main-img candle__img" src={{candle.imgs[0]}}>
         <!-- <img class="candle__main-img candle__img" src='assets/img/store-item-1.jpg'> -->
         <div class="candle__add-imgs" >
             <div class="wrap-img candle__add-img link" *ngFor="let item of [].constructor(candle?.imgs?.length); let i = index">
-                <img class="candle__img" src={{candle!.imgs[i]}}>
+                <img *ngIf="candle" class="candle__img" src={{candle.imgs[i]}}>
             </div>
 <!-- 
             <div class="wrap-img candle__add-img link" *ngFor="let item of [].constructor(candle?.imgs?.length); let i = index">
@@ -70,128 +73,79 @@
       <p>{{this.candle?.isAvailable ? "В наличии" : "Нет в наличии" }}</p>
         <app-button [hidden]="!this.candle?.isAvailable" class="button" text="В корзину" (click)="AddCartItem()"></app-button>
     </div>
+      
+  </div> 
+
+
+  <div class="central-container">
+    <div class="my-border">
+        <p class="my-collapse-p">
+            <a class="btn btn-primary my-collapse " data-bs-toggle="collapse" 
+            role="button" aria-expanded="false" aria-controls="collapseExample" href="#collapseExample">
+            Все ароматы по нотам</a>
+          </p>
+          <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+              <img src="assets/img/candle-collapse-1.png" alt="">
+
+            </div>
+          </div>
+    </div>
     
-</div> 
-<!-- 
-<div class="central-container">
-  <p class="my-collapse-p">
-    <a class="btn btn-primary my-collapse" data-bs-toggle="collapse" 
-    role="button" aria-expanded="false" aria-controls="collapseExample" href="#collapseExample">
-    Все ароматы по нотам</a>
-  </p>
-  <div class="collapse" id="collapseExample">
-    <div class="card card-body">
-      <img src="assets/img/candle-collapse-1.png" alt="">
-    </div>
-  </div>
-
-  <p class="my-collapse-p">
-    <a class="btn btn-primary my-collapse" data-bs-toggle="collapse" 
-    role="button" aria-expanded="false" aria-controls="collapseExample" href="#collapseExample1">
-    <span>Доставка</span></a>
-  </p>
-  <div class="collapse" id="collapseExample1">
-    <div class="card card-body">
-      <p>Кастомные свечи HYPE мы изготавливаем на заказ. Изготовление занимает до 4 рабочих дней. 
-        Однако, в коллекции HYPE в наличии всегда есть определенные сочетания цвета и аромата. 
-        Они указаны в описании товара. Если вам необходимо, чтобы заказ был срочно отправлен - пожалуйста, напишите об 
-        этом в комментариях к заказу при оформлении, мы предложим варианты.
-      </p>
-      <p>
-        Доставка по Москве
-      </p>
-      <p>
-      По Москве возможна курьерская доставка: 450 руб - в пределах 3 кольца и 550 руб - в пределах МКАД. 
-      Или доставка СДЭК: курьерская или до ближайшего к вам пункта выдачи.
-      </p>
-      <p>
-        Доставка по России
-      </p>
-      <p>
-        Мы отправляем ваши заказы по всей стране курьерской доставкой СДЭК. Выберите удобный адрес склада или введите 
-        адрес доставки до двери.
-      </p>
-      <p>
-        Доставка в другие страны
-      </p>
-      <p>
-        Мы также отправляем свечи по всему миру. Стоимость такой доставки рассчитывается отдельно после оформления и 
-        оплаты заказа. Выберите пункт “Доставка в другую страну” в процессе оформления заказа и мы оперативно свяжемся с
-         вами после оплаты!
-      </p>
-    </div>
-  </div>
-  
-</div> -->
-
-<div class="central-container">
-  <div class="my-border">
-      <p class="my-collapse-p">
-          <a class="btn btn-primary my-collapse " data-bs-toggle="collapse" 
-          role="button" aria-expanded="false" aria-controls="collapseExample" href="#collapseExample">
-          Все ароматы по нотам</a>
+    <div class="my-border-bottom">
+        <p class="my-collapse-p">
+            <a class="btn btn-primary my-collapse" data-bs-toggle="collapse" 
+            role="button" aria-expanded="false" aria-controls="collapseExample" href="#collapseExample1">
+            Доставка</a>
         </p>
-        <div class="collapse" id="collapseExample">
-          <div class="card card-body">
-            <img src="assets/img/candle-collapse-1.png" alt="">
-
-          </div>
+        <div class="collapse" id="collapseExample1">
+            <div class="card card-body">
+              <p>Кастомные свечи HYPE мы изготавливаем на заказ. Изготовление занимает до 4 рабочих дней. 
+                Однако, в коллекции HYPE в наличии всегда есть определенные сочетания цвета и аромата. 
+                Они указаны в описании товара. Если вам необходимо, чтобы заказ был срочно отправлен - пожалуйста, напишите об 
+                этом в комментариях к заказу при оформлении, мы предложим варианты.
+              </p>
+              <p>
+                Доставка по Москве
+              </p>
+              <p>
+              По Москве возможна курьерская доставка: 450 руб - в пределах 3 кольца и 550 руб - в пределах МКАД. 
+              Или доставка СДЭК: курьерская или до ближайшего к вам пункта выдачи.
+              </p>
+              <p>
+                Доставка по России
+              </p>
+              <p>
+                Мы отправляем ваши заказы по всей стране курьерской доставкой СДЭК. Выберите удобный адрес склада или введите 
+                адрес доставки до двери.
+              </p>
+              <p>
+                Доставка в другие страны
+              </p>
+              <p>
+                Мы также отправляем свечи по всему миру. Стоимость такой доставки рассчитывается отдельно после оформления и 
+                оплаты заказа. Выберите пункт “Доставка в другую страну” в процессе оформления заказа и мы оперативно свяжемся с
+                вами после оплаты!
+              </p>
+            </div>
         </div>
-  </div>
-  
-  <div class="my-border-bottom">
-      <p class="my-collapse-p">
-          <a class="btn btn-primary my-collapse" data-bs-toggle="collapse" 
-          role="button" aria-expanded="false" aria-controls="collapseExample" href="#collapseExample1">
-          Доставка</a>
-      </p>
-      <div class="collapse" id="collapseExample1">
-          <div class="card card-body">
-            <p>Кастомные свечи HYPE мы изготавливаем на заказ. Изготовление занимает до 4 рабочих дней. 
-              Однако, в коллекции HYPE в наличии всегда есть определенные сочетания цвета и аромата. 
-              Они указаны в описании товара. Если вам необходимо, чтобы заказ был срочно отправлен - пожалуйста, напишите об 
-              этом в комментариях к заказу при оформлении, мы предложим варианты.
-            </p>
-            <p>
-              Доставка по Москве
-            </p>
-            <p>
-            По Москве возможна курьерская доставка: 450 руб - в пределах 3 кольца и 550 руб - в пределах МКАД. 
-            Или доставка СДЭК: курьерская или до ближайшего к вам пункта выдачи.
-            </p>
-            <p>
-              Доставка по России
-            </p>
-            <p>
-              Мы отправляем ваши заказы по всей стране курьерской доставкой СДЭК. Выберите удобный адрес склада или введите 
-              адрес доставки до двери.
-            </p>
-            <p>
-              Доставка в другие страны
-            </p>
-            <p>
-              Мы также отправляем свечи по всему миру. Стоимость такой доставки рассчитывается отдельно после оформления и 
-              оплаты заказа. Выберите пункт “Доставка в другую страну” в процессе оформления заказа и мы оперативно свяжемся с
-               вами после оплаты!
-            </p>
-          </div>
-      </div>
-  </div>
-  
+    </div>
+    
 
 
 
-</div>  
+  </div>  
 
 
 
 
-  <!-- <div class="other-candles">
-    <app-shop-item class="app-shop-item"
-            *ngFor="let c of candlesService.candles" 
-            [candle]="c"
-            (clickAddCartItem) = "addCartItem($event)"  
-    ></app-shop-item>
-</div> -->
+    <!-- <div class="other-candles">
+      <app-shop-item class="app-shop-item"
+              *ngFor="let c of candlesService.candles" 
+              [candle]="c"
+              (clickAddCartItem) = "addCartItem($event)"  
+      ></app-shop-item>
+  </div> -->
 
-<div class="place"></div>
+  <div class="place"></div>
+</div>
