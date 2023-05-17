@@ -66,7 +66,9 @@
           class="cart-item__counter"
           [count]="count">
       </app-counter-wrapper>
-        <app-button class="button" text="В корзину" (click)="AddCartItem()"></app-button>
+
+      <p>{{this.candle?.isAvailable ? "В наличии" : "Нет в наличии" }}</p>
+        <app-button [hidden]="!this.candle?.isAvailable" class="button" text="В корзину" (click)="AddCartItem()"></app-button>
     </div>
     
 </div> 

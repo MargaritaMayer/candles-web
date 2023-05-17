@@ -28,7 +28,7 @@ export class CandlesService{
         const res: Candle[] = [];
         documentStream.forEach((d) => {
         const data: any = d.data();
-        res.push({"id": d.id, "title": data.title, "price": data.price, "imgs": data.imgs});
+        res.push({"id": d.id, "title": data.title, "price": data.price, "imgs": data.imgs, 'isAvailable': data.isAvailable});
         });
         this._candles = [];
         res.forEach((d) => { if (d) {

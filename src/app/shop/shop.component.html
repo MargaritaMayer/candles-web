@@ -3,22 +3,46 @@
 <div [hidden]="!(isLoading | async)" class="loader">
     <div  class="lds-ring" ><div></div><div></div><div></div><div></div></div>
 </div>
+<div class="shop" [hidden]="(isLoading | async)">
+    <div class="filter">
+        <div>
+            <input type="checkbox" id="scales" name="scales" (click)="showAvailableCandles()">
+            <label for="scales">В наличии</label>
+        </div>
 
-<div class="container link" [hidden]="isLoading | async">
-    <div class="store-flex" [hidden]="!isShowCandles">        
-        <app-shop-item class="app-shop-item"
-            *ngFor="let c of candlesService.candles" 
-            [candle]="c"
-            (clickAddCartItem) = "addCartItem($event)"  
-        ></app-shop-item>
+        <div (click)="popularCandle()">
+            <input type="radio" id="huey" name="drone" value="huey"
+                    checked>
+            <label for="huey">По популярности</label>
+        </div>
+
+        <div (click)="lowPriceCandle()">
+            <input type="radio" id="dewey" name="drone" value="dewey">
+            <label for="dewey">По возрастанию цены</label>
+        </div>
+
+        <div (click)="highPriceCandle()">
+            <input type="radio" id="louie" name="drone" value="louie">
+            <label for="louie">По убыванию цены</label>
+        </div>
     </div>
-    <!-- <app-cart 
-        [hidden]="isShowCandles"
-        [candles]="candlesService.candles"
-        [cartItems]="cartService.cartItems"
-        [sum]="cartService.summary"
-        (deleteEvent)="deleteCartItem($event)"
-        (countEvent)="updateCartItem($event)"
-        >
-    </app-cart>     -->
-</div>  
+    <div class="container link" [hidden]="isShowAvailableCandles">
+        <div class="shop-flex" [hidden]="!isShowCandles">        
+            <app-shop-item class="app-shop-item"
+                *ngFor="let c of candles" 
+                [candle]="c"
+                (clickAddCartItem) = "addCartItem($event)"  
+            ></app-shop-item>
+        </div>
+    </div>  
+
+    <div class="container link" [hidden]="(isLoading | async) || !isShowAvailableCandles">
+        <div class="shop-flex" [hidden]="!isShowCandles">        
+            <app-shop-item class="app-shop-item"
+                *ngFor="let c of candlesAvailable" 
+                [candle]="c"
+                (clickAddCartItem) = "addCartItem($event)"  
+            ></app-shop-item>
+        </div>
+    </div>  
+</div>

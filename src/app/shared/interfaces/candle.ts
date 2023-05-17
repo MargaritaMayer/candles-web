@@ -3,6 +3,7 @@ export interface Candle {
   title: string;
   price: number;
   imgs: string[];
+  isAvailable: boolean;
 }
 
 

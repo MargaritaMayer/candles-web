@@ -4,14 +4,12 @@
     </div>
     <div class="store-item__info">
         <p class="text store-item__head-text">Свеча {{candle?.title}}</p>
-        <p class="text store-item__add-info">цвет, аромат, фитиль на выбор</p>
+        <p class="store-item__add-info">цвет, аромат, фитиль на выбор</p>
+        <!-- <p class="text store-item__add-info">{{candle!.isAvailable}}</p> -->
         <div class="store-item__in-cart">
-            <app-counter-wrapper class="counter_hidden"
-            [count]="count"
-            (countEvent)="changeCount($event)"           
-            ></app-counter-wrapper>
+            <p class="text store-item__add-info">{{candle!.isAvailable ? 'В наличии': 'Нет в наличии'}}</p>
             <p class="text">{{candle?.price}} ₽</p>
         </div>
-        <app-button class="button" (click)='hideCandles()' text="В корзину"></app-button>
+        <!-- <app-button class="button" (click)='hideCandles()' text="В корзину"></app-button> -->
     </div>
 </div>
