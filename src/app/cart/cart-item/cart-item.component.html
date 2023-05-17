@@ -5,6 +5,8 @@
         </div>
         <div class="cart-item__info">
             <p class="cart-item__title">Свеча {{candle?.title}}</p>
+            <p>{{cartItem?.wick}} фитиль, аромат "{{cartItem?.scent}}", {{cartItem?.packaging}} упаковка</p>
+            
             <p class="link" (click)="delete()">Удалить</p>
         </div>
     </div>

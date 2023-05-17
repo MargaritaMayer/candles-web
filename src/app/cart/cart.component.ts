@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
 import { Candle } from 'src/app/shared/interfaces/candle';
 import { CartItem } from 'src/app/shared/interfaces/cart-item';
 import { CartService } from '../shared/services/cart.service';
-import { AuthService } from '../shared/services/auth.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { CandlesService } from '../shared/services/candles.service';
 
 @Component({
   selector: 'app-cart',
@@ -13,38 +13,38 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 })
 export class CartComponent implements OnInit {
 
-  constructor(    public cartService: CartService,
-    private auth: AuthService,
+  constructor(    
+    public cartService: CartService, 
+    public candlesService: CandlesService,
     private store: AngularFirestore, ) {}
 
   public get isLoading() {
-    return this.cartService.isLoading.asObservable();
+    return this.cartService.isLoading.asObservable() //&& this.candlesService.isLoading.asObservable();
   }
-  ngOnInit(): void {
-    this.cartService.initialize();
-    console.log(this.cartService.cartItems)
-  }
-  @Input()
-  public cartItems: CartItem[] | null = [];
 
-  @Input()
+  // public get isLoading1() {
+  //   return this.candlesService.isLoading.asObservable();
+  // }
+
+  ngOnInit(): void {
+    // this.candlesService.initialize();
+
+    this.cartService.initialize();
+    this.candles = this.candlesService.candles;
+  }
+  
+
   public candles: Candle[] | null = [];
 
-  @Input()
-  public sum = 0;
   
-  @Output()
-  public deleteEvent = new EventEmitter<string>();
-
-  @Output()
-  public countEvent = new EventEmitter<CartItem>();
+  
 
   public deleteItem(id: string) {
-    this.deleteEvent.emit(id);
+    this.cartService.deleteItem(id);
   }  
   
   public changeCount(cartItem: CartItem) {  
-    this.countEvent.emit(cartItem);
+    this.cartService.updateCount(cartItem.id, cartItem.count);
   }
 
   public getCandle(cartItem: CartItem) {

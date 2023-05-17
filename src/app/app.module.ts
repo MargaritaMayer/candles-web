@@ -40,7 +40,7 @@ import { ContactsModule } from './contacts/contacts.module';
     FooterModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    LoginModule,
+    // LoginModule,
     CounterWrapperModule,
     AngularFireModule.initializeApp(environment.firebase),
     RouterModule,
@@ -50,7 +50,7 @@ import { ContactsModule } from './contacts/contacts.module';
     provideFirebaseApp(() => getApp()),
     provideFirestore(() => getFirestore()),
     AngularFirestoreModule,
-    CandleModule,
+    // CandleModule,
     // NgbModule,
     ContactsModule,
 

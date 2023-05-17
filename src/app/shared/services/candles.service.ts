@@ -14,7 +14,6 @@ export class CandlesService{
     private  _isLoading$ = new BehaviorSubject(true);
       
     public get candles(): Candle[] {
-        // console.log("candles")
         // this.initialize();
         return this._candles;
     }
@@ -24,7 +23,6 @@ export class CandlesService{
     }
 
     async initialize() {
-        console.log("was here");
         const collection = this.store.collection('/candles');
         const documentStream = await lastValueFrom(collection.get());
         const res: Candle[] = [];

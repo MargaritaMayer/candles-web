@@ -9,6 +9,7 @@ import { AuthService } from '../shared/services/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./login.component.less']
 })
+
 export class LoginComponent {
   constructor( private auth: AuthService) { }
 

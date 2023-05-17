@@ -1,5 +1,4 @@
 <app-route [name]="'Корзина'"></app-route>
-
 <div [hidden]="!(isLoading | async)" class="loader">
     <div  class="lds-ring" ><div></div><div></div><div></div><div></div></div>
 </div>
@@ -23,7 +22,7 @@
         <div class="cart-payment">
             <div class="cart-payment__info">
                 <p class="cart-payment__el">Общая стоимость</p>
-                <p class="cart-payment__el">{{sum}} ₽</p>
+                <p class="cart-payment__el">{{cartService.summary}} ₽</p>
             </div>  
             <form class="form"> 
                 <input type="text" class="form__input" placeholder="адрес доставки" formControlName="adress">

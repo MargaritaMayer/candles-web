@@ -68,8 +68,7 @@ export class CandleComponent implements OnInit {
       'scent': scent,
       'packaging': packaging,
     }
-    console.log(cartItem);
-    // this.cartService.addCartItem(cartItem);
+    this.cartService.addCartItem(cartItem);
 
   }
  

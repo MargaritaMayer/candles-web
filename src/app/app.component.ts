@@ -6,7 +6,6 @@ import { Observable, lastValueFrom } from 'rxjs';
 import { authState } from '@angular/fire/auth';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { AuthService } from './shared/services/auth.service';
 import { CandlesService } from './shared/services/candles.service';
 
 @Component({
@@ -20,7 +19,6 @@ export class AppComponent implements OnInit{
 
   constructor(public candlesService: CandlesService){}
   ngOnInit(): void {
-    console.log("AppComponent ngOnInit")
     this.candlesService.initialize();
   }
   // item$: Observable<Candle[]>;

@@ -23,7 +23,7 @@ export class CartItemComponent {
 
   delete(): void {
     if (this.cartItem){
-      this.deleteEvent.emit(this.cartItem.idCandle);
+      this.deleteEvent.emit(this.cartItem.id);
     }
   }  
 
