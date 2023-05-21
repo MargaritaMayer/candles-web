@@ -14,9 +14,10 @@ export class CartService{
         private store: AngularFirestore,
         private auth: AuthService
     ) {
-        this.auth.currentUser.subscribe((currentUser) => {
-            if (!currentUser) return;
-            this._userId = currentUser.user.uid;
+        this.auth.userId.subscribe((userId) => {
+            if (!userId) return;
+            this._userId = userId;
+
             this.initialize();
         })
     }

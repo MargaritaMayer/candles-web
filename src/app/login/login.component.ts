@@ -18,6 +18,7 @@ export class LoginComponent {
     ) { }
 
   public isNewUser: boolean = false;
+  public isUser: boolean = false;
   public titleText = "Вход в THE CANDLES";
   public passwordPlaceholder = 'Введите пароль';
   public buttonText = "Вход";
@@ -32,6 +33,7 @@ export class LoginComponent {
 
   public registration(): void {
     this.isNewUser = true;
+    
     this.titleText = "Регистрация в THE CANDLES";
     this.passwordPlaceholder = 'Введите новый пароль';
     this.buttonText = "Зарегистрироваться";
@@ -40,41 +42,19 @@ export class LoginComponent {
   public submit() {
     const formData = this.form.value;
     if (formData.email && formData.password) {
+      this.isUser = true;
       if (this.isNewUser) {
         this.auth.register(formData.email, formData.password);
-        console.log("Вы зарегистрированы")
+        // console.log("Вы зарегистрированы")
       } else {  
         this.auth.login(formData.email, formData.password);
-        console.log("Вы зашли в аккаунт")
+        // console.log("Вы зашли в аккаунт")
         this.router.navigate(['/home']); 
       }
-    }
- 
+    } 
   }
- 
 
-  // public submit(): void {
-  //   this.isNewUser = true; 
-  //   this.titleText = this.isNewUser ? "Пароль для THE CANDLES" : "Здравствуйте, Маргарита"; 
-    
-  //   this.buttonText = this.isNewUser ? "Сохранить" : "Войти"; 
-  //   if (this.isNewUser) {
-  //     Array.prototype.forEach.call(
-  //       document.getElementsByClassName("row"),
-  //       (el) => el.classList.add("row-create-account")  
-  //     );
-  //     document.querySelector(".form-content")?.classList.add("form-create-account");
-  //     document.querySelector(".row_submit")?.classList.add("button-create-account");
-  
-  //   }
-   
-
-    
-  // }
-
-
-
-  // get email() { return this.form.get('email'); }
-  // get password() { return this.form.get('password'); }
-
+  public logout() {
+    this.auth.logout();
+  }
 }

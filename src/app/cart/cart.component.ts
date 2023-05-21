@@ -4,7 +4,7 @@ import { CartItem } from 'src/app/shared/interfaces/cart-item';
 import { CartService } from '../shared/services/cart.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { CandlesService } from '../shared/services/candles.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, timeout } from 'rxjs';
 import { AuthService } from '../shared/services/auth.service';
 
 @Component({
@@ -21,9 +21,9 @@ export class CartComponent implements OnInit {
     private changeDetectorRef: ChangeDetectorRef,
     private auth: AuthService,
   ) {
-    this.auth.currentUser.subscribe((currentUser) => {
-      if (!currentUser) return;
-      this.isAuth = currentUser.user.uid!==undefined;
+    this.auth.userId.subscribe((userId) => {
+      if (!userId) return;
+      this.isAuth = userId!==undefined;
   })
   } 
 

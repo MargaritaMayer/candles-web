@@ -1,16 +1,16 @@
 <app-route [name]="'Корзина'"></app-route>
 
-<div [hidden]="isAuth">
-    <h1>Вы не авторизованы</h1>
-    <p>Для доступа к личному кабинету необходимо <a routerLink="/login" class="link">войти</a></p>
+<div [hidden]="!(isLoading | async)" class="loader">
+    <div  class="lds-ring" ><div></div><div></div><div></div><div></div></div>
 </div>
-<div [hidden]="!isAuth">
-    <div [hidden]="!(isLoading | async)" class="loader">
-        <div  class="lds-ring" ><div></div><div></div><div></div><div></div></div>
+<div [hidden]="isLoading | async">
+
+    <div [hidden]="isAuth">
+        <h1>Вы не авторизованы</h1>
+        <p>Для доступа к личному кабинету необходимо <a routerLink="/login" class="link">войти</a></p>
     </div>
-    
-    <div [hidden]="isLoading | async">
-        <div class="cart-wrapper">
+    <div [hidden]="!isAuth">   
+        <div class="cart-wrapper" [hidden]="(this.cartItems?.length ?? 0)>0">
             <h1 class="title">Корзина</h1>
             <h2 class='no-items'>Вы пока ничего не добавили в корзину.</h2>
         </div>
