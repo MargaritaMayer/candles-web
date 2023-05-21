@@ -1,5 +1,19 @@
 <app-route [name]="'Login'"></app-route>
 
+<form
+    class="b-form"
+    [formGroup]="testForm"
+>
+    <tui-input formControlName="testValue">
+        Type an email
+        <input
+            tuiTextfield
+            type="email"
+        />
+    </tui-input>
+</form>
+
+
 <form class="form" [formGroup]="form" (submit)="submit()">
     <p class="form__title form__text">{{titleText}}</p>
     <p class="form__info form__text" [hidden]="isNewUser">Войдите в аккаунт или зарегистрируйтесь</p>

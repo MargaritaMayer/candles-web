@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from '../button/button.module';
 import { CounterWrapperModule } from '../counter-wrapper/counter-wrapper.module';
 import { RouteModule } from '../route/route.module';
+import { TuiRootModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
+import { TuiInputModule } from '@taiga-ui/kit';
 
 @NgModule({
     declarations: [
@@ -15,8 +17,10 @@ import { RouteModule } from '../route/route.module';
         FormsModule,
         ReactiveFormsModule,
         ButtonModule,
+        TuiInputModule,
         CounterWrapperModule,
-        RouteModule
+        RouteModule,
+        TuiTextfieldControllerModule,
     ],
     exports: [
         LoginComponent,

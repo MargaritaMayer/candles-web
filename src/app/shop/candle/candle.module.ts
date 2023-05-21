@@ -6,7 +6,6 @@ import { CandleComponent } from './candle.component';
 import { RouteModule } from '../../route/route.module';
 import { LoginModule } from '../../login/login.module';
 import { ShopItemModule } from '../shop-item/shop-item.module';
-import { NgbCollapseModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     declarations: [
@@ -18,8 +17,6 @@ import { NgbCollapseModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
         LoginModule,
         ButtonModule,
         ShopItemModule,
-        NgbModule,
-        NgbCollapseModule,
         CounterWrapperModule
     ],
     exports: [

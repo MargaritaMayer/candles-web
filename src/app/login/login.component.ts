@@ -23,7 +23,9 @@ export class LoginComponent {
   public passwordPlaceholder = 'Введите пароль';
   public buttonText = "Вход";
 
-  
+  readonly testForm = new FormGroup({
+      testValue: new FormControl('mail@mail.ru'),
+  });
 
   public form = new FormGroup({
     email: new FormControl<string | null>(null, [Validators.required, Validators.email]),
