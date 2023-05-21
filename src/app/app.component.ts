@@ -19,47 +19,23 @@ import { CartService } from './shared/services/cart.service';
 export class AppComponent implements OnInit{
 
   constructor(public candlesService: CandlesService,
-    public cartService: CartService){}
+    public cartService: CartService, 
+    // private route: ActivatedRoute
+    ){}
+
+  // private fragment: string = '';
+
   ngOnInit(): void {
     this.candlesService.initialize();
     // this.cartService.initialize();
+    // this.route.fragment.subscribe(fragment => { if (fragment) this.fragment = fragment; });
+
   }
-  // item$: Observable<Candle[]>;
-  
-  // firestore: Firestore = inject(Firestore);
-
-  // async getCollection(collection: AngularFirestoreCollection<unknown>): Promise<Candle[]> {
-  //   const documentStream = await lastValueFrom(collection.get());
-  //   const res: Candle[] = [];
-  //   documentStream.forEach((d) => {
-  //     const data: any = d.data();
-  //     res.push({"id": d.id, "title": data.title, "price": data.price, "imgs": data.imgs});
-  //   });
-  //   return res;
+  // ngAfterViewInit(): void {
+  //   try {
+  //     document.querySelector('#' + this.fragment)?.scrollIntoView();
+  //   } catch (e) { }
   // }
 
-  // async main(): Promise<void> {
-  //   await this.auth.login('rita.mayer2001@gmail.com', '12345678');
-  //   this.store.collection(`/users/${this.auth.currentUser?.user.uid}/cart`).add({"idCandle": "dfsd", "count": 5, "color": 9});
-  //   this.store.collection(`/users/${this.auth.currentUser?.user.uid}/cart`).doc("w6NfpTr746vhRyvdqgBc").update({"count": 12});
-  //   this.store.collection(`/users/${this.auth.currentUser?.user.uid}/cart`).doc("w6NfpTr746vhRyvdqgBc").delete();
-
-  //   console.log(await this.getCollection(this.store.collection('/candles')));
-  //   console.log(await this.getCollection(this.store.collection(`/users/${this.auth.currentUser?.user.uid}/cart`)));
-  //   // console.log(await (await this.getCollection(this.store.collection('/candles'))).forEach((d) => console.log(d)));
-
-  // }
-
-  // constructor(private store: AngularFirestore, private auth: AuthService) {
-    // this.main();
-    
-
-    // todo = this.store.collection('todo').valueChanges({ idField: 'id' }) as Observable<Task[]>;
-    // inProgress = this.store.collection('inProgress').valueChanges({ idField: 'id' }) as Observable<Task[]>;
-    // done = this.store.collection('done').valueChanges({ idField: 'id' }) as Observable<Task[]>;
-
- 
-  // }
-  
 
 }

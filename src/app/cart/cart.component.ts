@@ -22,8 +22,14 @@ export class CartComponent implements OnInit {
     private auth: AuthService,
   ) {
     this.auth.userId.subscribe((userId) => {
-      if (!userId) return;
-      this.isAuth = userId!==undefined;
+      if (userId === undefined) {
+        return;
+      }
+      // this._isLoading.next(false);
+      this.isAuth = userId!==null;
+      if (userId===null) {
+        this._isLoading.next(false);
+      }
   })
   } 
 

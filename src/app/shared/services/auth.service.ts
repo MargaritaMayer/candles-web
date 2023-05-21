@@ -9,7 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({ providedIn: 'root'})
 export class AuthService {
   // public currentUser: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
-  public userId: BehaviorSubject<string | null> =  new BehaviorSubject<string | null>(null);
+  public userId: BehaviorSubject<string | null | undefined> =  new BehaviorSubject<string | null | undefined>(undefined);
 
   constructor(
     private auth: Auth, 
@@ -19,6 +19,8 @@ export class AuthService {
       this.fireauth.authState.subscribe((user) => {
         if (user) {
           this.userId.next(user.uid);
+        } else {
+          this.userId.next(null);
         }
 
       })
