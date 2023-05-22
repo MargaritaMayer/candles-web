@@ -37,41 +37,28 @@
             <input type="radio" id="louie" name="drone" value="louie">
             <label for="louie">По убыванию цены</label>
         </div>
-
-        <!-- <form [formGroup]="formSelect">
-            <tui-hosted-dropdown
-                [content]="dropdown"
-                [(open)]="open"
+        <!-- <form class="b-form">
+     
+            <tui-select
+                click="clickSelect()"
+                tuiTextfieldSize="m"
+                class="tui-space_vertical-4"
+                [formControl]="testValue"
+                [tuiTextfieldLabelOutside]="true"
             >
-                <button
-                    tuiButton
-                    type="button"
-                    [appearance]="appearance"
-                    [iconRight]="length ? cleaner : arrow"
-                    [style.--tui-padding.rem]="1.25"
-                    (keydown.delete)="formSelect.reset()"
-                >
-                    {{ text }}
-                </button>
-                <ng-template #dropdown>
-                    <tui-data-list-wrapper
-                        tuiMultiSelectGroup
-                        formControlName="control"
-                        [items]="items"
-                    ></tui-data-list-wrapper>
-                </ng-template>
-                <ng-template #cleaner>
-                    <button
-                        tuiIconButton
-                        appearance="icon"
-                        size="xs"
-                        icon="tuiIconCloseLarge"
-                        type="reset"
-                        tuiPreventDefault="mousedown"
-                    ></button>
-                </ng-template>
-            </tui-hosted-dropdown>
+                Character
+                <input
+                    id="select"
+                    tuiTextfield
+                    placeholder="Choose your hero"
+                />
+                <tui-data-list-wrapper
+                    *tuiDataList
+                    [items]="items"
+                ></tui-data-list-wrapper>
+            </tui-select>
         </form> -->
+        
         
     </div>
      <div class="container link" [hidden]="isShowAvailable | async">

@@ -27,7 +27,8 @@ export class ShopComponent implements OnInit{
   // public isShowAvailableCandles = false;
   public popularCandles: Candle[] = [];
   public popularAvailableCandles: Candle[] = [];
-
+  public selectValue: null | string = null;
+  public select: HTMLSelectElement | null = null;
   public get candles() {
     return this._candles;
   }
@@ -44,7 +45,13 @@ export class ShopComponent implements OnInit{
     this.popularCandles = [... this._candles];
     this.popularAvailableCandles = [... this.candlesAvailable]
     this.changeDetectorRef.detectChanges();
+    // this.select = <HTMLSelectElement>document.getElementById('select');
+
+    // this.select.addEventListener('change', (val) => {
+    //   console.log(val);
+    // });
     
+  
   }
   form = new FormGroup({
       isShowAvailableCandles: new FormControl<boolean>(false),
@@ -97,46 +104,34 @@ export class ShopComponent implements OnInit{
   public popularCandle(){
     this._candles = [...this.popularCandles];
     this.candlesAvailable = [...this.popularAvailableCandles];
+    
   }
+  // clickSelect(){
+  //   const select = <HTMLSelectElement>document.getElementById('select');
+  //   // this.selectValue = select.options[select.selectedIndex].text;  
+  //   console.log("hi", select)
+    
+  //   this.selectValue = select.options[select.selectedIndex].text;   
+  //   console.log(this.selectValue)
+  //   if (this.selectValue==='По популярности'){
+  //     this.popularCandle()
+  //   }
+  //   if (this.selectValue==='По возрастанию цены'){
+  //     this.highPriceCandle()
+  //   }
+  //   if (this.selectValue==='По убыванию цены'){
+  //     this.lowPriceCandle()
+  //   }
+  // }
+  
 
 
-
-  public get control() { return this.formSelect?.get('control'); }
-
-
-
-  formSelect = new FormGroup({
-      control: new FormControl([]),
-  });
-
-  open = false;
-
-  readonly items = ['Drafts', 'In Progress', 'Completed'];
-
-  readonly arrow = TUI_ARROW;
-
-  private get value(): readonly string[] {
-      return this.formSelect.get('control')?.value || [];
-  }
-
-  get appearance(): string {
-      return this.length ? 'whiteblock-active' : 'whiteblock';
-  }
-
-  get length(): number {
-      return this.value.length || 0;
-  }
-
-
-  get text(): string {
-      switch (this.length) {
-          case 0:
-              return 'Select';
-          case 1:
-              return this.value[0];
-          default:
-              return `${this.length} selected`;
-      }
-  }
+  // public items = [
+  //   'По популярности',
+  //   'По возрастанию цены',
+  //   'По убыванию цены',
+    
+  // ];
+  // testValue = new FormControl("По популярности");
  
 }
