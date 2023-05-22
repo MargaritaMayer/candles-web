@@ -37,27 +37,22 @@
             <input type="radio" id="louie" name="drone" value="louie">
             <label for="louie">По убыванию цены</label>
         </div>
-        <!-- <form class="b-form">
+        <form class="b-form form__select" [formGroup]="secondForm" >
      
             <tui-select
-                click="clickSelect()"
-                tuiTextfieldSize="m"
-                class="tui-space_vertical-4"
-                [formControl]="testValue"
-                [tuiTextfieldLabelOutside]="true"
-            >
-                Character
-                <input
-                    id="select"
-                    tuiTextfield
-                    placeholder="Choose your hero"
-                />
-                <tui-data-list-wrapper
-                    *tuiDataList
-                    [items]="items"
-                ></tui-data-list-wrapper>
-            </tui-select>
-        </form> -->
+            tuiTextfieldSize="s"
+            [formControlName]="'choose'"
+            class="searchForm__year"
+            [readOnly]="true"
+          >
+            <tui-data-list-wrapper
+              *tuiDataList
+              [items]="items"
+            ></tui-data-list-wrapper>
+          </tui-select>
+        </form>
+        
+        
         
         
     </div>

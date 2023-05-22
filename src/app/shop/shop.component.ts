@@ -87,7 +87,8 @@ export class ShopComponent implements OnInit{
   public showAvailableCandles(){
     this.form.value.isShowAvailableCandles = ! this.form.value.isShowAvailableCandles;
     this._isShowAvailableCandles.next(this.form.value.isShowAvailableCandles);
-      // this.form.get('isShowAvailableCandles')?.setValue(!this.form?.get('isShowAvailableCandles'))
+    // console.log(this.testValue.value);
+
   }
 
   public lowPriceCandle() {
@@ -106,32 +107,39 @@ export class ShopComponent implements OnInit{
     this.candlesAvailable = [...this.popularAvailableCandles];
     
   }
-  // clickSelect(){
-  //   const select = <HTMLSelectElement>document.getElementById('select');
-  //   // this.selectValue = select.options[select.selectedIndex].text;  
-  //   console.log("hi", select)
+  clickSelect(){
+    console.log("changed")
+    // const select = <HTMLSelectElement>document.getElementById('select');
+    // this.selectValue = select.options[select.selectedIndex].text;  
+    // console.log("hi", select)
     
-  //   this.selectValue = select.options[select.selectedIndex].text;   
-  //   console.log(this.selectValue)
-  //   if (this.selectValue==='По популярности'){
-  //     this.popularCandle()
-  //   }
-  //   if (this.selectValue==='По возрастанию цены'){
-  //     this.highPriceCandle()
-  //   }
-  //   if (this.selectValue==='По убыванию цены'){
-  //     this.lowPriceCandle()
-  //   }
-  // }
+    // this.selectValue = select.options[select.selectedIndex].text;   
+    // console.log(this.selectValue)
+    // if (this.selectValue==='По популярности'){
+    //   this.popularCandle()
+    // }
+    // if (this.selectValue==='По возрастанию цены'){
+    //   this.highPriceCandle()
+    // }
+    // if (this.selectValue==='По убыванию цены'){
+    //   this.lowPriceCandle()
+    // }
+  }
   
 
 
-  // public items = [
-  //   'По популярности',
-  //   'По возрастанию цены',
-  //   'По убыванию цены',
+  public items = [
+    'По популярности',
+    'По возрастанию цены',
+    'По убыванию цены',
     
-  // ];
-  // testValue = new FormControl("По популярности");
+  ];
+
+  secondForm = new FormGroup({
+    choose: new FormControl<string>("По популярности")
+  });
+
+
+  // testValue = new FormControl();
  
 }
