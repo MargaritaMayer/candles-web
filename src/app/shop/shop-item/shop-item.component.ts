@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Candle } from 'src/app/shared/interfaces/candle';
 import { CartItem } from 'src/app/shared/interfaces/cart-item';
 import { Router } from '@angular/router';
@@ -9,10 +9,15 @@ import { Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./shop-item.component.less']
 })
-export class ShopItemComponent {
+export class ShopItemComponent implements OnInit{
   public count = 1;
 
   constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    
+   
+  }
   @Input()
   public candle : Candle | null = null;
 

@@ -101,4 +101,6 @@ export class CartComponent implements OnInit {
   public getCandle(cartItem: CartItem) {
     return this.candles?.find(candle => candle.id === cartItem.idCandle)
   }
+
+  // public testValue = new FormControl(true);
  }

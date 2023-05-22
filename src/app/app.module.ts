@@ -25,6 +25,11 @@ import { CandleModule } from './shop/candle/candle.module';
 import { ContactsModule } from './contacts/contacts.module';
 import { TuiAlertModule, TuiButtonModule, TuiRootModule } from '@taiga-ui/core';
 import { TuiInputModule } from '@taiga-ui/kit';
+import { TuiLetModule } from '@taiga-ui/cdk';
+import { AboutComponent } from './about/about.component';
+import { AboutModule } from './about/about.module';
+import { FavoritesComponent } from './favorites/favorites.component';
+import { FavoritesModule } from './favorites/favorites.module';
 
 
 @NgModule({
@@ -57,9 +62,10 @@ import { TuiInputModule } from '@taiga-ui/kit';
     // CandleModule,
     // NgbModule,
     ContactsModule,
-    
+    TuiLetModule,
     TuiAlertModule,
-
+    AboutModule,
+    FavoritesModule,
 
   ],
   providers: [

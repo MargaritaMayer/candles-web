@@ -6,8 +6,8 @@
         <p class="text store-item__head-text">Свеча {{candle?.title}}</p>
         <p class="store-item__add-info">цвет, аромат, фитиль на выбор</p>
         <div class="store-item__in-cart">
-            <p class="text store-item__add-info isNotAvailable" [hidden]="candle!.isAvailable">Нет в наличии</p>
-            <p class="text">{{candle?.price}} ₽</p>
+            <p class="text store-item__add-info">{{candle?.price}} ₽</p>
+            <p [hidden]="candle!.isAvailable" class="text store-item__add-info isNotAvailable">Нет в наличии</p>
         </div>
     </div>
 </div>

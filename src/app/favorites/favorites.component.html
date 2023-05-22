@@ -1,0 +1,110 @@
+<app-route [name]="'Избранное'"></app-route>
+
+<div [hidden]="!(isLoading | async)" class="loader">
+    <div  class="lds-ring" ><div></div><div></div><div></div><div></div></div>
+</div>
+<div class="cart-container" [hidden]="isLoading | async">
+
+    <div  [hidden]="isAuth">
+        <div class="about-brand central-container" >
+            
+            <div class="about-brand__wrap-img wrap-img">
+                <img class="about-brand__img" src="assets/img/cart-banner.jpg">
+            </div>
+
+            <div class="about-brand__info">
+                <h1 class="no_auth__main">Вы не авторизованы</h1>
+                    <p class="no_auth">Для доступа к избранному необходимо <a routerLink="/login" class="link bold">войти в личный кабинет</a></p>
+    
+            </div>
+           
+        
+        </div>
+    </div>
+    <div [hidden]="!isAuth">   
+        <div class="cart-wrapper" [hidden]="(this.favoriteItems?.length ?? 0)>0">
+            <h1 class="title">Избранное</h1>
+            <h2 class='no-items'>Вы пока ничего не добавили в избранное.</h2>
+        </div>
+        <div class="cart-elements" [hidden]="(this.favoriteItems?.length ?? 0)===0">
+            <div class="cart-items">
+<!-- 
+                <table class="tui-table">
+                    <tbody>
+                        <tr class="tui-table__tr tui-table__tr_border_none">
+                          
+                            <th class="tui-table__th">Title</th>
+                            <th class="tui-table__th">Author</th>
+                            <th class="tui-table__th">Date</th>
+                            <th class="tui-table__th tui-table__th_last">Platform</th>
+                        </tr>
+                        <app-favorite-item
+                            *ngFor="let item of favoriteItems" 
+                            [candle]="getCandle(item)"
+                            [favoriteItem]="item"
+                            (deleteEvent)="deleteItem($event)"
+                        ></app-favorite-item>
+                       
+                    
+                    </tbody>
+                </table> -->
+
+                <table class="tui-table">
+                    <tbody>
+                        <tr class="tui-table__tr tui-table__tr_border_none">
+                            <th class="tui-table__th tui-table__th_first">
+                                <tui-checkbox name="testValue" ngDefaultControl [formControl]="testValue"></tui-checkbox>
+                            </th>
+                            <th class="tui-table__th fs">Фотография</th>
+                            <th class="tui-table__th fs">Название</th>
+                            <th class="tui-table__th fs">Аромат</th>
+
+                            <th class="tui-table__th fs">Фитиль</th>
+                            <th class="tui-table__th fs">Упаковка</th>
+                            <th class="tui-table__th tui-table__th_last fs">Стоимость</th>
+                        </tr>
+                      
+                        <tr class="tui-table__tr tui-table__tr_border_none"
+                        *ngFor="let item of favoriteItems" >
+                            <td class="tui-table__td tui-table__td_first">
+                                
+                            </td>
+                            <td class="tui-table__td">
+                                 <div class="wrap-img">
+                                    <img class="cart-item__img" src="{{getCandle(item)!.imgs[0]}}">
+                                </div>
+                            </td>
+
+                            <td class="tui-table__td padding">
+                                <h1 class="bold  table__title">Свеча "{{getCandle(item)?.title}}"</h1>
+                                <span class="table__remove link" (click)="deleteFavorite(item.id)">Удалить</span></td>
+
+                            <td class="tui-table__td padding">"{{item.scent}}"</td>
+                            <td class="tui-table__td padding">{{item.wick}}</td>
+                            <td class="tui-table__td padding">{{item.packaging}}</td>
+
+                            <td class="tui-table__td tui-table__td_last padding">{{getCandle(item)?.price}} ₽/шт.</td>
+                            
+                        </tr>
+                     
+                    </tbody>
+                </table>
+                
+               
+         
+            </div>
+       
+        </div>    
+    
+    </div>
+
+   
+    
+
+
+</div>
+
+
+
+
+   

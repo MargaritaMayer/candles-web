@@ -6,6 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CandlesService } from '../../shared/services/candles.service';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { FavoriteItem } from 'src/app/shared/interfaces/favorite-item';
+import { FavoriteService } from 'src/app/shared/services/favorite.service';
 
 @Component({
   selector: 'app-candle',
@@ -22,6 +24,7 @@ export class CandleComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public candlesService: CandlesService,
     public cartService: CartService,
+    public favoriteService: FavoriteService,
     private router: Router,
     private changeDetectorRef: ChangeDetectorRef,
     private auth: AuthService,
@@ -33,6 +36,36 @@ export class CandleComponent implements OnInit {
   }
   public get candle() {
     return this._candle;
+  }
+
+  public addFavorite(){
+
+    if (this.userId === null) {
+      this.auth.showNotification("Чтобы добавить товар в избранное, пожалуйста, авторизируйтесь", "Вам необходимо авторизироваться");
+      this.router.navigate(['/login'])
+      return;
+    } 
+    if (!this._candle) return;
+    const selectWick = <HTMLSelectElement>document.getElementById('wick');
+    const wick = selectWick.options[selectWick.selectedIndex].text;
+
+    const selectScent = <HTMLSelectElement>document.getElementById('scent');
+    const scent = selectScent.options[selectScent.selectedIndex].text;
+
+    const selectPackaging = <HTMLSelectElement>document.getElementById('packaging');
+    const packaging = selectPackaging.options[selectPackaging.selectedIndex].text;
+
+    const favoriteItem: FavoriteItem = {
+      'id': '', 
+      'idCandle': this._candle.id || '', 
+      'wick': wick,
+      'scent': scent,
+      'packaging': packaging,
+    }
+    
+    this.favoriteService.addFavoriteItem(favoriteItem);
+
+
   }
 
   async ngOnInit(): Promise<void> {
@@ -52,6 +85,7 @@ export class CandleComponent implements OnInit {
       this.userId = userId;
     }
     )
+    
   }
 
   public ShowCollapse(id: string) {
@@ -63,7 +97,7 @@ export class CandleComponent implements OnInit {
 
   public AddCartItem() {
     if (this.userId === null) {
-      this.auth.showNotification("Чтобы добавить товар в свечу, пожалуйста, авторизируйтесь", "Вам необходимо авторизироваться");
+      this.auth.showNotification("Чтобы добавить товар в корзину, пожалуйста, авторизируйтесь", "Вам необходимо авторизироваться");
       this.router.navigate(['/login'])
       return;
     } 

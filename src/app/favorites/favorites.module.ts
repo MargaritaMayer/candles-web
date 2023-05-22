@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
-import { CartComponent } from './cart.component';
 import { CommonModule } from '@angular/common';
-import { CartItemModule } from './cart-item/cart-item.module';
+import { FavoritesComponent } from './favorites.component';
 import { RouteModule } from '../route/route.module';
 import { RouterModule } from '@angular/router';
 import { TuiCheckboxBlockModule, TuiInputModule } from '@taiga-ui/kit';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TuiButtonModule } from '@taiga-ui/core';
 
+
+
 @NgModule({
     declarations: [
-        CartComponent
+        FavoritesComponent,
     ],
     imports: [
         CommonModule, 
         RouteModule,
         RouterModule,
-        CartItemModule,
         TuiInputModule,
         FormsModule,
         ReactiveFormsModule,
@@ -24,7 +24,8 @@ import { TuiButtonModule } from '@taiga-ui/core';
         TuiCheckboxBlockModule,
     ],
     exports: [
-        CartComponent,
-    ]
+        FavoritesComponent,
+      ]
  })
- export class CartModule { }
+
+export class FavoritesModule { }

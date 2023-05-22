@@ -3,11 +3,23 @@
 <div [hidden]="!(isLoading | async)" class="loader">
     <div  class="lds-ring" ><div></div><div></div><div></div><div></div></div>
 </div>
-<div class="container" [hidden]="isLoading | async">
+<div class="cart-container" [hidden]="isLoading | async">
 
     <div  [hidden]="isAuth">
-        <h1>Вы не авторизованы</h1>
-        <p class="no_auth">Для доступа к корзине необходимо <a routerLink="/login" class="link bold">войти в личный кабинет</a></p>
+        <div class="about-brand central-container" >
+            
+            <div class="about-brand__wrap-img wrap-img">
+                <img class="about-brand__img" src="assets/img/cart-banner.jpg">
+            </div>
+
+            <div class="about-brand__info">
+                <h1 class="no_auth__main">Вы не авторизованы</h1>
+                    <p class="no_auth">Для доступа к корзине необходимо <a routerLink="/login" class="link bold">войти в личный кабинет</a></p>
+    
+            </div>
+           
+        
+        </div>
     </div>
     <div [hidden]="!isAuth">   
         <div class="cart-wrapper" [hidden]="(this.cartItems?.length ?? 0)>0">
@@ -16,13 +28,22 @@
         </div>
         <div class="cart-elements" [hidden]="(this.cartItems?.length ?? 0)===0">
             <div class="cart-items">
-                <app-cart-item
-                    *ngFor="let item of cartItems" 
-                    [candle]="getCandle(item)"
-                    [cartItem]="item"
-                    (deleteEvent)="deleteItem($event)"
-                    (countEvent)="changeCount($event)"
-                ></app-cart-item>
+
+                <table class="tui-table">
+                    <tbody>
+                        <app-cart-item
+                            *ngFor="let item of cartItems" 
+                            [candle]="getCandle(item)"
+                            [cartItem]="item"
+                            (deleteEvent)="deleteItem($event)"
+                            (countEvent)="changeCount($event)"
+                        ></app-cart-item>
+                       
+                    
+                    </tbody>
+                </table>
+
+             
                
          
             </div>
@@ -108,6 +129,14 @@
         </div>    
     
     </div>
+
+   
+    
+
+
 </div>
+
+
+
 
    

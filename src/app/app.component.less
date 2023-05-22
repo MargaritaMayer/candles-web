@@ -1,20 +1,21 @@
 @import '@taiga-ui/core/styles/taiga-ui-local.less';
+@import '@taiga-ui/styles/taiga-ui-global.less';
 
 [tuiButton][data-appearance='custom']{
     // color: black;
     padding: 9px;
     margin-top: 10px;
-    background-color: #F9DAE4;
+    background-color: #f6daf9;
     .t-wrapper {
         cursor: default;
     }
 }
 
 :root {
-    --tui-info-bg: #ef9da41d;
-    --tui-primary: #EF9DA4;
-    --tui-primary-hover: #bc71c9;
-    --tui-primary-active: #8f75d1;
+    --tui-info-bg:  #ef9da41d;
+    --tui-primary:#bc71c9; 
+    --tui-primary-hover: #9e71c9;
+    --tui-primary-active: #6d63b5;
 }
 // .wrapper {
 //     padding: 0.75rem;
@@ -39,7 +40,7 @@ body {
     // margin-bottom: 20px;
 }
 .header__info {
-    background-color: #F9DAE4;
+    background-color: #f6daf9;
     height: 35px;
 }
 .header__text{
@@ -129,12 +130,12 @@ a:visited{
     display: flex;
     list-style-type: none;
     gap: 45px;
-    background-color: #FFF6DE;
+    // background-color: #FFF6DE;
     justify-content: center;
     margin: 35px 0 65px 0;
 }
 .central-container{
-    width: 800px;
+    width: 1000px;
     margin: auto;
 }
 .main-banner__part{
@@ -144,7 +145,7 @@ a:visited{
     display: flex;
 }
 .main-banner__info{
-    background-color: #F9DAE4;
+    
     padding: 0 40px;
     box-sizing: border-box;
 }
@@ -314,7 +315,7 @@ a:link{
     border: 8px solid #fff;
     border-radius: 50%;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: #F9DAE4 transparent transparent transparent;
+    border-color: #f6daf9 transparent transparent transparent;
 }
 .lds-ring div:nth-child(1) {
     animation-delay: -0.45s;
@@ -349,3 +350,4 @@ a:link{
     height: 100px;
     background-color: red;
 }
+

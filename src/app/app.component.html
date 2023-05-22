@@ -1,10 +1,10 @@
 <tui-root>
-
-<div [hidden]="!(isLoading | async)" class="loader">
+    <ng-container *tuiLet="isLoading | async as isLoad">
+    <div [hidden]="!isLoad" class="loader">
     <div  class="lds-ring" ><div></div><div></div><div></div><div></div></div>
 </div>
 
-<div [hidden]="isLoading | async" class="content">
+<div [hidden]="isLoad" class="content">
     <header class="header">
         <div class="header__info">
             <p class="header__text">БЕСПЛАТНАЯ ДОСТАВКА ДО ПУНКТА ВЫДАЧИ ОТ 7000 РУБ. | ВСЕ СВЕЧИ ИЗГОТАВЛИВАЕМ НА ЗАКАЗ ЗА 3 — 4 РАБОЧИХ ДНЯ</p>      
@@ -19,9 +19,10 @@
                     <a class='link' routerLink="/cart">Корзина </a>
                 </li>
                 <li class="menu__left-item">
-                    <!-- <a class='link'>О нас</a> -->
-                    <a [routerLink]="['/']" fragment="about">О нас</a>
-
+                    <a class='link' routerLink="/about">О нас</a>
+                </li>
+                <li class="menu__left-item">
+                    <a class='link' routerLink="/favorites">Избранное</a>
                 </li>
             </ul>
             <a class='menu__logo logo link' routerLink="/home">THE CANDLES</a>
@@ -47,6 +48,6 @@
     <app-footer></app-footer>
 
 </div>
+</ng-container>
 
-    
 </tui-root>

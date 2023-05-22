@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { Candle } from 'src/app/shared/interfaces/candle';
 import { CartItem } from 'src/app/shared/interfaces/cart-item';
+import { FavoriteService } from 'src/app/shared/services/favorite.service';
 
 @Component({
   selector: 'app-cart-item',
@@ -9,6 +10,10 @@ import { CartItem } from 'src/app/shared/interfaces/cart-item';
   styleUrls: ['./cart-item.component.less']
 })
 export class CartItemComponent {
+
+  constructor(    
+    public favoriteService: FavoriteService, 
+  ) {}
   @Input()
   public cartItem : CartItem | null = null;
 
@@ -38,5 +43,17 @@ export class CartItemComponent {
           "packaging": this.cartItem.packaging,
         });
     }
+  }
+
+  addFavorites() {
+    if (!this.cartItem) return
+    this.favoriteService.addFavoriteItem({
+      "id": this.cartItem.id, 
+      "idCandle": this.cartItem.idCandle, 
+      "wick": this.cartItem.wick,
+      "scent": this.cartItem.scent,
+      "packaging": this.cartItem.packaging,
+    })
+    
   }
 }
