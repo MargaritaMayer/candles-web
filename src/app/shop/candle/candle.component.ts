@@ -17,7 +17,7 @@ export class CandleComponent implements OnInit {
   public _candle : Candle | null = null;
   public count = 1;
   public userId: string | null | undefined = "";  
-  
+  public idMainImg = 0;
   constructor(
     private activatedRoute: ActivatedRoute,
     public candlesService: CandlesService,
@@ -28,6 +28,9 @@ export class CandleComponent implements OnInit {
 
     ) { }
 
+  public clickImg(id: number){
+    this.idMainImg = id;
+  }
   public get candle() {
     return this._candle;
   }

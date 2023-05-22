@@ -6,20 +6,14 @@
 <div [hidden]='candle===null'>
   <div  class="candle central-container"> 
     <div class="candle__imgs wrap-img"> 
-        <img *ngIf="candle" class="candle__main-img candle__img" src={{candle.imgs[0]}}>
-        <!-- <img class="candle__main-img candle__img" src='assets/img/store-item-1.jpg'> -->
+        <img *ngIf="candle" class="candle__main-img" src={{candle.imgs[idMainImg]}}>
         <div class="candle__add-imgs" >
-            <div class="wrap-img candle__add-img link" *ngFor="let item of [].constructor(candle?.imgs?.length); let i = index">
+            <div class="wrap-img candle__add-img link" 
+            (click)="clickImg(i)"
+            *ngFor="let item of [].constructor(candle?.imgs?.length); let i = index">
                 <img *ngIf="candle" class="candle__img" src={{candle.imgs[i]}}>
             </div>
-<!-- 
-            <div class="wrap-img candle__add-img link" *ngFor="let item of [].constructor(candle?.imgs?.length); let i = index">
-                <img class="candle__img" src='assets/img/store-item-1_1.jpg'>
-            </div>
-            <div class="wrap-img candle__add-img link" *ngFor="let item of [].constructor(candle?.imgs?.length); let i = index">
-                <img class="candle__img" src='assets/img/store-item-1_2.jpg'>
-            </div>
-            -->
+      
             
         </div>
     </div>
@@ -62,14 +56,15 @@
         <p>Зеленая — Мандарин и базилик — Хлопковый фитиль</p>
         <p>Голубая — Пич блоссом — Хлопковый фитиль</p>    
         <p>Ярко - розовая — Кашемировый уют — Хлопковый фитиль</p>
-        
-        <app-counter-wrapper 
-          (countEvent)="changeCount($event)"
-          class="cart-item__counter"
+        <div class="cart-item__counter">
+          <app-counter-wrapper 
+          (countEvent)="changeCount($event)" 
           [count]="count">
-      </app-counter-wrapper>
+        </app-counter-wrapper>
+        </div>
+       
 
-      <p>{{this.candle?.isAvailable ? "В наличии" : "Нет в наличии" }}</p>
+      <p class='isNotAvailable'[hidden]="this.candle?.isAvailable">Нет в наличии</p>
       <button  
           class="button"
           [hidden]="!this.candle?.isAvailable"
