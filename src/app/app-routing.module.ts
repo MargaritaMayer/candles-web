@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { CartComponent } from './cart/cart.component';
 import { ShopComponent } from './shop/shop.component';
@@ -24,8 +24,13 @@ const appRoute: Routes = [
   {path: '**', component: PageNotFoundComponent},
 ]
 
+const routerOptions: ExtraOptions = {
+  scrollPositionRestoration: 'enabled',
+  anchorScrolling: 'enabled',
+}
+
 @NgModule({
-  imports: [RouterModule.forRoot(appRoute)],
+  imports: [RouterModule.forRoot(appRoute, routerOptions)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

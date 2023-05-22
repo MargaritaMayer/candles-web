@@ -63,8 +63,16 @@ export class AppComponent implements OnInit{
 
   ngOnInit() {
     this.candlesService.initialize();
+
+    // this.router.navigate( ['/home', ' ' ], {fragment: ''});
+
   
   }
+
+  // aboutClicked() {
+  //   this.router.navigateByUrl('/home#about')
+  // }
+
 
 
 

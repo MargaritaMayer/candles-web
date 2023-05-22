@@ -19,7 +19,8 @@
                     <a class='link' routerLink="/cart">Корзина </a>
                 </li>
                 <li class="menu__left-item">
-                    <a class='link' href="/home#about">О нас</a>
+                    <!-- <a class='link'>О нас</a> -->
+                    <a [routerLink]="['/']" fragment="about">О нас</a>
 
                 </li>
             </ul>
@@ -38,6 +39,8 @@
         </div>
 
     </header>
+
+
 
     <router-outlet></router-outlet>
      
