@@ -1,7 +1,16 @@
+@import '~@taiga-ui/core/styles/taiga-ui-local';
+
+.link{
+    user-select: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+
 .form{
     width: 630px;
     margin: auto;
-    margin-top: 150px;
+    margin-top: 40px;
     background-color: white;
     box-shadow: 0 0.25rem 1.5rem #0000001f;
     padding: 50px;
@@ -14,6 +23,7 @@
 
 .form__title{
     font-size: 30px; 
+    margin: 0 0 30px 0;
 }
 
 .content{
@@ -27,33 +37,47 @@
     border-radius: 3px;
 }
 .content__input{
-    height: 50px;
-    box-sizing: border-box;
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: inherit;
+    margin-bottom: 15px;
 }
-app-button { 
-    height: 50px;
-    font-size: 15px;
-    width: 100%;
-    border-radius: inherit;
- }
+.alert{
+    color: #f45725;
+    padding: 3px 0 0 5px;
+    font-size: 14px;
+}
+// tui-primitive-textfield{
+//     min-height: 35px;
+
+// }
+
+// .content{
+//     height: 35px;
+//     // box-sizing: border-box;
+//     // width: 100%;
+//     // padding: 10px;
+//     // border: none;
+//     // border-radius: inherit;
+//     margin-bottom: 10px;
+// }
+// app-button { 
+//     height: 50px;
+//     font-size: 15px;
+//     width: 100%;
+//     border-radius: inherit;
+//  }
 .content__wrapper {
     display: flex;
     width: 100%;
     justify-content: space-between;
-
-
-   
+    padding-top: 25px;  
 }
- .content__row-submit{
-    width: 170px;
-    // align-self: flex-end;
-    border-radius: 3px;
-    // border-radius: inherit;  
- }
+
+// @import '@taiga-ui/core/styles/taiga-ui-fonts.less';
+// // This goes into global, non-encapsulated styles
+// [tuiWrapper][data-appearance='primary'] {
+//     font-size: 17px;
+// }
+
+
  .content__input:focus
 {
     border: 1px solid #000;
@@ -64,26 +88,48 @@ app-button {
     flex-direction: column;
 }
 .content__registration{
-    font-size: 15px;
-    padding-left: 10px;
+    font-size: 16px;
+    padding-left: 5px;
+    line-height: 56px;
+    margin: 0;
 }
+.form__info{
+    font-size: 16px;
+}
+
+.content__forgot-password{
+    margin: 0 0 20px 0;
+    // line-height: 56px;
+    font-size: 16px;
+    color: gray;
+    text-align: center;
+}
+
 .content__registration_hidden{
+    
     visibility: hidden;
 }
+
 
 .row-create-account {
     flex-basis: auto;
     margin-bottom: 20px;
     border-radius: 3px;
 }
-.button-create-account{
-    width: 150px;
-    align-self: flex-end;
-    border-radius: 3px;
+// .button-create-account{
+//     width: 150px;
+//     align-self: flex-end;
+//     border-radius: 3px;
+// }
+
+
+.b-form{
+    width: 630px;
 }
-.link{
-    user-select: none;
-    cursor: pointer;
-    text-decoration: none;
-    color: black;
+
+.button {
+    width: 90px;
+    height: 40px;
+    font-size: 15px;
+    background-color: #EF9DA4;
 }

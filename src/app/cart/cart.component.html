@@ -3,18 +3,18 @@
 <div [hidden]="!(isLoading | async)" class="loader">
     <div  class="lds-ring" ><div></div><div></div><div></div><div></div></div>
 </div>
-<div [hidden]="isLoading | async">
+<div class="container" [hidden]="isLoading | async">
 
-    <div [hidden]="isAuth">
+    <div  [hidden]="isAuth">
         <h1>Вы не авторизованы</h1>
-        <p>Для доступа к личному кабинету необходимо <a routerLink="/login" class="link">войти</a></p>
+        <p class="no_auth">Для доступа к корзине необходимо <a routerLink="/login" class="link bold">войти в личный кабинет</a></p>
     </div>
     <div [hidden]="!isAuth">   
         <div class="cart-wrapper" [hidden]="(this.cartItems?.length ?? 0)>0">
             <h1 class="title">Корзина</h1>
             <h2 class='no-items'>Вы пока ничего не добавили в корзину.</h2>
         </div>
-        <div class="cart-elements">
+        <div class="cart-elements" [hidden]="(this.cartItems?.length ?? 0)===0">
             <div class="cart-items">
                 <app-cart-item
                     *ngFor="let item of cartItems" 
@@ -31,11 +31,78 @@
                     <p class="cart-payment__el">Общая стоимость</p>
                     <p class="cart-payment__el">{{summary}} ₽</p>
                 </div>  
-                <form class="form"> 
-                    <input type="text" class="form__input" placeholder="адрес доставки" formControlName="adress">
+                
+                <form class="form" [formGroup]="form"> 
+                    <div class="form__input">
+                        <tui-input 
+                        formControlName="address">
+                        Адрес доставки
+                        <input
+                            tuiTextfield      
+                        />
+                        </tui-input>
+
+                        <div *ngIf="address?.invalid && (address?.dirty || address?.touched)"
+                            class="alert">
+                            <div *ngIf="address!.errors?.['required']">
+                                поле обязательно для заполнения
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <div class="form__input">
+                        <tui-input 
+                        formControlName="name">
+                        Имя
+                        <input
+                            tuiTextfield
+                            />
+                        </tui-input>
+
+                        <div *ngIf="name?.invalid && (name?.dirty || name?.touched)"
+                            class="alert">
+                            <div *ngIf="name!.errors?.['required']">
+                                поле обязательно для заполнения
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <div class="form__input">
+                        <tui-input 
+                        
+                        formControlName="email">
+                        Почта
+                        <input
+                            tuiTextfield
+                            type="email"
+                        />
+                        </tui-input>
+                        <div *ngIf="email?.invalid && (email?.dirty || email?.touched)"
+                            class="alert">
+                            <div *ngIf="email!.errors?.['required']">
+                                поле обязательно для заполнения
+                            </div>
+                            
+                            <div *ngIf="email!.errors?.['email']">
+                                ваш email недействителен, введите верный email
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button  
+                        (click)="buyCandle()"
+                        tuiButton
+                        type="button"
+                    >
+                        Купить
+                    </button>
+
+                    <!-- <input type="text" class="form__input" placeholder="адрес доставки" formControlName="adress">
                     <input type="text" class="form__input" placeholder="имя" formControlName="name">
-                    <input type="text" class="form__input" placeholder="email" formControlName="email">
-                    <app-button class="button" text="Оплатить"></app-button>
+                    <input type="text" class="form__input" placeholder="email" formControlName="email"> -->
+                    <!-- <app-button class="button" text="Оплатить"></app-button> -->
                 </form>
             </div> 
         </div>    

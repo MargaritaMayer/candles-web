@@ -1,3 +1,35 @@
+@import '@taiga-ui/core/styles/taiga-ui-local.less';
+
+[tuiButton][data-appearance='custom']{
+    // color: black;
+    padding: 9px;
+    margin-top: 10px;
+    background-color: #F9DAE4;
+    .t-wrapper {
+        cursor: default;
+    }
+}
+
+:root {
+    --tui-info-bg: #ef9da41d;
+    --tui-primary: #EF9DA4;
+    --tui-primary-hover: #bc71c9;
+    --tui-primary-active: #8f75d1;
+}
+// .wrapper {
+//     padding: 0.75rem;
+//     background: #8f75d1;
+    
+//     &_dark {
+//         background-color: #30406a;
+//     }
+ 
+//     &_light {
+//         background-color: #e5e7ea;
+//     }
+// }
+
+
 /* first page */
 body {
     margin: 0;
@@ -259,3 +291,53 @@ a:visited{
 .app-shop-footer{
     background-color: wheat;
 }
+
+a:link{
+    text-decoration: none;
+}
+
+
+
+.lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 130px;
+    height: 130px;
+}
+.lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    margin: 8px;
+    border: 8px solid #fff;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #F9DAE4 transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+0% {
+    transform: rotate(0deg);
+}
+100% {
+    transform: rotate(360deg);
+}
+}
+.loader{
+    display: flex;
+    justify-content: center;
+}
+
+[hidden]{
+    display:none;
+  }

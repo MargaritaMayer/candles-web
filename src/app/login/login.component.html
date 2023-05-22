@@ -1,42 +1,95 @@
-<app-route [name]="'Login'"></app-route>
+<app-route [name]="'Вход в аккаунт'"></app-route>
 
 <form
-    class="b-form"
-    [formGroup]="testForm"
+    
+    class="b-form form"
+    [formGroup]="form!"
 >
-    <tui-input formControlName="testValue">
-        Type an email
-        <input
-            tuiTextfield
-            type="email"
-        />
-    </tui-input>
-</form>
-
-
-<form class="form" [formGroup]="form" (submit)="submit()">
     <p class="form__title form__text">{{titleText}}</p>
-    <p class="form__info form__text" [hidden]="isNewUser">Войдите в аккаунт или зарегистрируйтесь</p>
-    <div class="form__content content">
-        <div class="content__row">
-            <input type="text" class="content__input" 
-            placeholder="Электронная почта" formControlName="email">
-        </div>
-        <div class="content__row">
-            <input type="text" class="content__input" 
-            [placeholder]="passwordPlaceholder" formControlName="password">
-        </div>
-        <div class="content__row" [hidden]="!isNewUser">
-            <input type="text" class="content__input" 
-            placeholder="Подтвердите пароль" formControlName="password2">
-        </div>
-        <div class="content__wrapper">
-            <p class="content__registration link"(click)="registration()">Регистрация</p>
-            <p class="content__registration link"(click)="logout()">Выход</p>
-            <div class="content__row-submit">
-                <app-button [text]="buttonText"></app-button>
+    <p class="content__forgot-password link" (click)="resetPassword()" [hidden]="isNewUser || isResetPassword">Забыли пароль?</p>
+
+    <p class="form__info form__text" [hidden]="!isNewUser">{{formText}} </p>
+    <div class="content__input">
+        <tui-input 
+            formControlName="email">
+            Введите почту
+            <input
+                tuiTextfield
+                type="email"
+            />
+        </tui-input>
+        
+        <div *ngIf="email?.invalid && (email?.dirty || email?.touched)"
+            class="alert">
+            <div *ngIf="email!.errors?.['required']">
+                поле обязательно для заполнения
+            </div>
+            
+            <div *ngIf="email!.errors?.['email']">
+                ваш email недействителен, введите верный email
             </div>
         </div>
-        
     </div>
+    
+    <div class="content__input" [hidden]="isResetPassword">
+        <tui-input-password
+            formControlName="password"
+            class="tui-space_top-2"
+        >
+            {{passwordPlaceholder}}
+            <input
+                
+                tuiTextfield
+                placeholder=""
+            />
+        </tui-input-password>
+        <div *ngIf="password?.invalid && (password?.dirty || password?.touched)"
+            class="alert">
+            <div *ngIf="password!.errors?.['required']">
+                поле обязательно для заполнения
+            </div>
+            
+            <div *ngIf="password!.errors?.['minlength']">
+                минимальная длина — 6 символов
+            </div>
+        </div>
+    </div>
+
+    <div class="content__input" [hidden]="!isNewUser">
+        <tui-input-password
+            formControlName="password2"
+            class="tui-space_top-2"
+            >
+            Подтвердите пароль
+            <input
+                tuiTextfield
+                placeholder=""
+            />
+        </tui-input-password>
+        <div *ngIf="password2?.invalid && (password2?.dirty || password2?.touched)"
+            class="alert">
+            <div *ngIf="password2!.errors?.['required']">
+                поле обязательно для заполнения
+            </div>
+            
+            <div *ngIf="!password2!.errors?.['required'] && password2!.errors?.['passwordsMustMatch']">
+                пароль не совпадает, подтвердите пароль
+            </div>
+        </div>
+    </div>
+    
+    
+     
+    <div class="content__wrapper">
+        <p class="content__registration link" (click)="registration()">Регистрация</p>
+
+        <button  
+            (click)="submit()"
+            tuiButton
+            type="button"
+        >
+            {{buttonText}}
+        </button>
+    </div>
+    
 </form>

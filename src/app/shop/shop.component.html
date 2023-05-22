@@ -5,11 +5,23 @@
 </div>
 <div class="shop" [hidden]='candles===null'>
     <div class="filter">
-        <div>
-            <input type="checkbox" id="scales" name="scales" (click)="showAvailableCandles()">
-            <label for="scales">В наличии</label>
-        </div>
+        <div class="tui-space_bottom-2">
+            <form [formGroup]="form">
+                <div>
+                    
+                    <tui-toggle
+                    (click)="showAvailableCandles()"
+                    formControlName="isShowAvailableCandles"
+                    size="l"
+                    class="tui-space_left-1"
+                    [showIcons]="true"
+                    ></tui-toggle>
+                    <span class="toggle__text">В наличии</span>
+                </div>
+            </form>
 
+            
+        </div>
         <div (click)="popularCandle()">
             <input type="radio" id="huey" name="drone" value="huey"
                     checked>
@@ -25,8 +37,44 @@
             <input type="radio" id="louie" name="drone" value="louie">
             <label for="louie">По убыванию цены</label>
         </div>
+
+        <!-- <form [formGroup]="formSelect">
+            <tui-hosted-dropdown
+                [content]="dropdown"
+                [(open)]="open"
+            >
+                <button
+                    tuiButton
+                    type="button"
+                    [appearance]="appearance"
+                    [iconRight]="length ? cleaner : arrow"
+                    [style.--tui-padding.rem]="1.25"
+                    (keydown.delete)="formSelect.reset()"
+                >
+                    {{ text }}
+                </button>
+                <ng-template #dropdown>
+                    <tui-data-list-wrapper
+                        tuiMultiSelectGroup
+                        formControlName="control"
+                        [items]="items"
+                    ></tui-data-list-wrapper>
+                </ng-template>
+                <ng-template #cleaner>
+                    <button
+                        tuiIconButton
+                        appearance="icon"
+                        size="xs"
+                        icon="tuiIconCloseLarge"
+                        type="reset"
+                        tuiPreventDefault="mousedown"
+                    ></button>
+                </ng-template>
+            </tui-hosted-dropdown>
+        </form> -->
+        
     </div>
-    <div class="container link" [hidden]="isShowAvailableCandles">
+     <div class="container link" [hidden]="isShowAvailable | async">
         <div class="shop-flex" [hidden]="!isShowCandles">        
             <app-shop-item class="app-shop-item"
                 *ngFor="let c of candles" 
@@ -36,7 +84,7 @@
         </div>
     </div>  
 
-    <div class="container link" [hidden]="!isShowAvailableCandles">
+    <div class="container link" [hidden]="!(isShowAvailable | async)">
         <div class="shop-flex" [hidden]="!isShowCandles">        
             <app-shop-item class="app-shop-item"
                 *ngFor="let c of candlesAvailable" 

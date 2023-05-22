@@ -5,6 +5,9 @@ import { ShopComponent } from './shop.component';
 import { CommonModule } from '@angular/common';
 import { CartModule } from '../cart/cart.module';
 import { RouteModule } from '../route/route.module';
+import { TuiDataListWrapperModule, TuiToggleModule } from '@taiga-ui/kit';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TuiButtonModule, TuiDataListModule, TuiHostedDropdownModule } from '@taiga-ui/core';
 
 @NgModule({
     declarations: [
@@ -14,7 +17,13 @@ import { RouteModule } from '../route/route.module';
         CommonModule,
         CartModule,
         ShopItemModule,
-        RouteModule
+        RouteModule,
+        TuiToggleModule,
+        FormsModule,
+        ReactiveFormsModule,
+        TuiHostedDropdownModule,
+        TuiButtonModule,
+        TuiDataListWrapperModule
   
     ],
     exports: [

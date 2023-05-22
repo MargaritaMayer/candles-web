@@ -1,5 +1,10 @@
 <tui-root>
-<div class="content">
+
+<div [hidden]="!(isLoading | async)" class="loader">
+    <div  class="lds-ring" ><div></div><div></div><div></div><div></div></div>
+</div>
+
+<div [hidden]="isLoading | async" class="content">
     <header class="header">
         <div class="header__info">
             <p class="header__text">БЕСПЛАТНАЯ ДОСТАВКА ДО ПУНКТА ВЫДАЧИ ОТ 7000 РУБ. | ВСЕ СВЕЧИ ИЗГОТАВЛИВАЕМ НА ЗАКАЗ ЗА 3 — 4 РАБОЧИХ ДНЯ</p>      
@@ -14,7 +19,6 @@
                     <a class='link' routerLink="/cart">Корзина </a>
                 </li>
                 <li class="menu__left-item">
-                    <!-- <a class='link' [routerLink] = "['/home']" fragment="about">О нас</a> -->
                     <a class='link' href="/home#about">О нас</a>
 
                 </li>
@@ -28,7 +32,7 @@
                     <a class='link' routerLink="/contacts">Контакты</a>
                 </li>
                 <li class="menu__left-item">
-                    <a class='link' routerLink="/login">Войти</a>
+                    <a id="login" class='link'>{{loginText | async}}</a>
                 </li>
             </ul>
         </div>
@@ -39,5 +43,7 @@
      
     <app-footer></app-footer>
 
-</div> 
+</div>
+
+    
 </tui-root>

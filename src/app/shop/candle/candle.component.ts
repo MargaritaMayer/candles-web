@@ -5,6 +5,7 @@ import { CartItem } from '../../shared/interfaces/cart-item';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CandlesService } from '../../shared/services/candles.service';
 import { CartService } from 'src/app/shared/services/cart.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-candle',
@@ -15,14 +16,15 @@ export class CandleComponent implements OnInit {
 
   public _candle : Candle | null = null;
   public count = 1;
-  public color = 2;
+  public userId: string | null | undefined = "";  
   
   constructor(
     private activatedRoute: ActivatedRoute,
     public candlesService: CandlesService,
     public cartService: CartService,
     private router: Router,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private auth: AuthService,
 
     ) { }
 
@@ -42,7 +44,11 @@ export class CandleComponent implements OnInit {
       }      
     } 
     this.changeDetectorRef.detectChanges();
-
+    this.auth.userId.subscribe(
+    (userId) => {
+      this.userId = userId;
+    }
+    )
   }
 
   public ShowCollapse(id: string) {
@@ -53,6 +59,12 @@ export class CandleComponent implements OnInit {
   }
 
   public AddCartItem() {
+    if (this.userId === null) {
+      this.auth.showNotification("Чтобы добавить товар в свечу, пожалуйста, авторизируйтесь", "Вам необходимо авторизироваться");
+      this.router.navigate(['/login'])
+      return;
+    } 
+    this.auth.showNotification("", "Товар добавлен в корзину");
     if (!this._candle) return;
     const selectWick = <HTMLSelectElement>document.getElementById('wick');
     const wick = selectWick.options[selectWick.selectedIndex].text;
@@ -71,6 +83,7 @@ export class CandleComponent implements OnInit {
       'scent': scent,
       'packaging': packaging,
     }
+    
     this.cartService.addCartItem(cartItem);
 
   }

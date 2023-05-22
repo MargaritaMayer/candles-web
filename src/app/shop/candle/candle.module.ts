@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ButtonModule } from '../../button/button.module';
 import { CounterWrapperModule } from '../../counter-wrapper/counter-wrapper.module';
 import { CandleComponent } from './candle.component';
 import { RouteModule } from '../../route/route.module';
 import { LoginModule } from '../../login/login.module';
 import { ShopItemModule } from '../shop-item/shop-item.module';
+import { TuiAccordionModule } from '@taiga-ui/kit';
+import { TuiButtonModule } from '@taiga-ui/core';
 
 @NgModule({
     declarations: [
@@ -15,9 +16,11 @@ import { ShopItemModule } from '../shop-item/shop-item.module';
         CommonModule,   
         RouteModule,
         LoginModule,
-        ButtonModule,
         ShopItemModule,
-        CounterWrapperModule
+        CounterWrapperModule,
+        TuiAccordionModule,
+        TuiButtonModule,
+
     ],
     exports: [
         CandleComponent,

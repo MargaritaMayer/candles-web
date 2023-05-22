@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { HomeComponent } from './home.component';
 import { CommonModule } from '@angular/common';
-import { ButtonModule } from '../button/button.module';
 import { CounterWrapperModule } from '../counter-wrapper/counter-wrapper.module';
 import { RouterModule } from '@angular/router';
+import { TuiButtonModule } from '@taiga-ui/core';
 
 @NgModule({
     declarations: [
@@ -11,9 +11,9 @@ import { RouterModule } from '@angular/router';
     ],
     imports: [
         CommonModule,   
-        ButtonModule,
         CounterWrapperModule,
         RouterModule,
+        TuiButtonModule,
     ],
     exports: [
         HomeComponent,

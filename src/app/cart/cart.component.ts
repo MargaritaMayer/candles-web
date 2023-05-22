@@ -6,6 +6,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { CandlesService } from '../shared/services/candles.service';
 import { BehaviorSubject, Observable, timeout } from 'rxjs';
 import { AuthService } from '../shared/services/auth.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-cart',
@@ -19,7 +20,7 @@ export class CartComponent implements OnInit {
     public cartService: CartService, 
     public candlesService: CandlesService,
     private changeDetectorRef: ChangeDetectorRef,
-    private auth: AuthService,
+    public auth: AuthService,
   ) {
     this.auth.userId.subscribe((userId) => {
       if (userId === undefined) {
@@ -30,8 +31,30 @@ export class CartComponent implements OnInit {
       if (userId===null) {
         this._isLoading.next(false);
       }
-  })
+    })
   } 
+  form = new FormGroup({
+    email: new FormControl<string | null>(null, [Validators.required, Validators.email]),
+    name: new FormControl<string | null>(null, [Validators.required, Validators.minLength(5)]),
+    address: new FormControl<string | null>(null, [Validators.required]),
+  });
+
+  public get email() { return this.form?.get('email'); }
+  public get name() { return this.form?.get('name'); }
+  public get address() { return this.form?.get('address'); }
+
+
+  public buyCandle() {
+    if (this.form.invalid) {
+      this.form.controls['email'].markAsDirty();
+      this.form.controls['name'].markAsDirty();
+      this.form.controls['address'].markAsDirty();
+      return;
+    }
+    this.auth.showNotification('С вами скоро свяжется курьер', 'Ваш заказ оформлен');
+
+  }
+
 
   public candles: Candle[] | null = null; 
   

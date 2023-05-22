@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Auth, UserCredential, signInWithEmailAndPassword, signInWithCustomToken, Persistence, browserSessionPersistence, browserLocalPersistence, signInWithCredential, AuthCredential, User } from '@angular/fire/auth';
+import { Inject, Injectable } from '@angular/core';
+import { Auth, UserCredential, signInWithEmailAndPassword, signInWithCustomToken, Persistence, browserSessionPersistence, browserLocalPersistence, signInWithCredential, AuthCredential, User, createUserWithEmailAndPassword } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { CartService } from './cart.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { BehaviorSubject } from 'rxjs';
+import { TuiAlertService } from '@taiga-ui/core';
 
 
 @Injectable({ providedIn: 'root'})
@@ -15,6 +16,7 @@ export class AuthService {
     private auth: Auth, 
     private router: Router, 
     private fireauth: AngularFireAuth,
+    @Inject(TuiAlertService) private readonly alerts: TuiAlertService,
     ) {
       this.fireauth.authState.subscribe((user) => {
         if (user) {
@@ -26,9 +28,17 @@ export class AuthService {
       })
     }
 
+
+  showNotification(text: string, label: string): void {
+    this.alerts
+        .open(text, {label: label})
+        .subscribe();
+  }
   public my_login(username: string, password: string): Promise<User> {
     return signInWithEmailAndPassword(this.auth, username, password).then((user) => user.user);
-    
+  }
+  public my_register(username: string, password: string): Promise<User> {
+    return createUserWithEmailAndPassword(this.auth, username, password).then((user) => user.user);
   }
 
   async login(email: string, password: string) {
@@ -36,36 +46,40 @@ export class AuthService {
       // this.currentUser.next(await this.my_login(email, password));
       const id: string = (await this.my_login(email, password)).uid;
       this.userId.next(id);
-
-      // localStorage.setItem('token', this.auth.currentUser?.getIdToken);
-
-      // this.router.navigate(['/home']); 
+      this.router.navigate(['/home']); 
+      this.showNotification("", "Вы успешно зашли в свой аккаунт");
     }  catch(error){
-      alert("Something went wrong in login");
+      this.showNotification("Введен неверный email или пароль", "Вы не смогли войти в аккаунт")
       this.router.navigate(['/login']);
     }
-  } 
+  }
 
-  register(email: string, password: string) {
-    this.fireauth.createUserWithEmailAndPassword(email, password).then(() => {
-      alert("Registration Successful");
+
+  async register(email: string, password: string) {
+    try {
+      const id: string = (await this.my_register(email, password)).uid;
+      this.userId.next(id);
+      this.router.navigate(['/home']);
+      this.showNotification("", "Вы успешно зарегистрировались и зашли в свой аккаунт")
+
+    } catch(error) {
+      this.showNotification("Пожалуйста, попробуйте еще раз", "Вы не смогли создать аккаунт");
       this.router.navigate(['/login']);
-    }, err => {
-      alert("Something went wrong in registration");
-      this.router.navigate(['/login']);
-    }) 
+    }     
   }
 
   logout() {
     this.fireauth.signOut().then(() => {
-      // this.currentUser.next(null);
       this.userId.next(null);
 
       localStorage.removeItem('token');
-      this.router.navigate(['/login']);
     }, err => {
-      alert(err.message);
+      this.showNotification("Пожалуйста, попробуйте еще раз", "Вы не смогли выйти из аккаунта")
     }) 
+  }
+
+  resetPassword(email: string) {
+    this.fireauth.sendPasswordResetEmail(email)
   }
 
 

@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CartComponent } from './cart.component';
 import { CommonModule } from '@angular/common';
-import { ButtonModule } from '../button/button.module';
 import { CartItemModule } from './cart-item/cart-item.module';
 import { RouteModule } from '../route/route.module';
 import { RouterModule } from '@angular/router';
+import { TuiInputModule } from '@taiga-ui/kit';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TuiButtonModule } from '@taiga-ui/core';
 
 @NgModule({
     declarations: [
@@ -15,7 +17,10 @@ import { RouterModule } from '@angular/router';
         RouteModule,
         RouterModule,
         CartItemModule,
-        ButtonModule,  
+        TuiInputModule,
+        FormsModule,
+        ReactiveFormsModule,
+        TuiButtonModule,
     ],
     exports: [
         CartComponent,
