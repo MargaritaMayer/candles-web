@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { Auth, UserCredential, signInWithEmailAndPassword, signInWithCustomToken, Persistence, browserSessionPersistence, browserLocalPersistence, signInWithCredential, AuthCredential, User, createUserWithEmailAndPassword } from '@angular/fire/auth';
+import { Auth, UserCredential, signInWithEmailAndPassword, signInWithCustomToken, Persistence, browserSessionPersistence, browserLocalPersistence, signInWithCredential, AuthCredential, User, createUserWithEmailAndPassword, sendPasswordResetEmail } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { CartService } from './cart.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -63,7 +63,8 @@ export class AuthService {
       this.showNotification("", "Вы успешно зарегистрировались и зашли в свой аккаунт")
 
     } catch(error) {
-      this.showNotification("Пожалуйста, попробуйте еще раз", "Вы не смогли создать аккаунт");
+
+      this.showNotification("", "Почта, которую вы ввели, уже используется или ее не существует");
       this.router.navigate(['/login']);
     }     
   }
@@ -78,8 +79,11 @@ export class AuthService {
     }) 
   }
 
-  resetPassword(email: string) {
-    this.fireauth.sendPasswordResetEmail(email)
+  async resetPassword(email: string) {
+    try {
+      return sendPasswordResetEmail(this.auth, String(email));
+    } catch (error) {
+    }
   }
 
 

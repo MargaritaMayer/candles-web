@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   }
   form = new FormGroup({
-    email: new FormControl<string | null>(null, [Validators.required, Validators.email]),
+    email: new FormControl<string | null>(null, [Validators.required, Validators.email,]),
     password: new FormControl<string | null>(null, [Validators.required, Validators.minLength(6)]),
     password2: new FormControl<string | null>(null, [Validators.required, this.passwordsMustMatch]),
   });
@@ -53,23 +53,18 @@ export class LoginComponent implements OnInit {
   }
 
   public resetPassword(): void {
+    
     document.querySelector(".content__registration")?.classList.add("content__registration_hidden");
     this.buttonText = "Получить письмо"
     this.isResetPassword = true;
-      // .then(() => {
-      //   this.successMsg = 'Ссылка на восстановление пароля отправлена на ваш email';
-      // })
-      // .catch(err => {
-      //   this.errorMsg = this.authErrorService.getErrorMsg(err.code);
-      // });
+    this.titleText = "Восстановление пароля"
   }
   public submit() {
-    console.log("HIHI")
+    
 
 
-    if ((this.form.controls['email'].invalid || this.form.controls['password'].invalid) ||
+    if (((this.form.controls['email'].invalid || this.form.controls['password'].invalid) && !this.isResetPassword)||
       (this.isNewUser && this.form.invalid) || (this.isResetPassword && this.form.controls['email'].invalid)) {
-      console.log("h")
       this.form.controls['email'].markAsDirty();
       this.form.controls['password'].markAsDirty();
       this.form.controls['password2'].markAsDirty();
@@ -78,7 +73,16 @@ export class LoginComponent implements OnInit {
     if (this.isResetPassword){
       
       if (!this.form.value.email) return;
-      this.auth.resetPassword(this.form.value.email)
+
+      this.auth.resetPassword(this.form.value.email).then(() => {
+        this.auth.showNotification("", "Письмо отправлено вам на почту")
+        this.router.navigate(['/home'])
+      }, err => {
+        this.auth.showNotification("Аккаунта с данной почтой не существует", 
+        "Почта не зарегистрирована")
+      }) 
+
+     
       
     }
 
@@ -91,13 +95,20 @@ export class LoginComponent implements OnInit {
     if (formData.email && formData.password) {
       this.isUser = true;
       if (this.isNewUser) {
-        this.auth.register(formData.email, formData.password);
+        this.auth.register(formData.email, formData.password).then(() => {
+       
+        }, err => {
+        
+        console.log(err);
+
+        }) ;
         
       }  else {
-        this.auth.login(formData.email, formData.password);
+        this.auth.login(formData.email, formData.password)
       }    
     
     } 
+    this.form.reset();
   }
 
 
