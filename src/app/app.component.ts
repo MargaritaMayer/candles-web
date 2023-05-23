@@ -24,7 +24,6 @@ export class AppComponent implements OnInit{
     public cartService: CartService, 
     private auth: AuthService,
     private router: Router,
-    // @Inject(TuiAlertService) private readonly alerts: TuiAlertService,
     ){
       this.auth.userId.subscribe((userId) => {
         const login = document.getElementById('login')
@@ -64,15 +63,9 @@ export class AppComponent implements OnInit{
 
   ngOnInit() {
     this.candlesService.initialize();
-
-    // this.router.navigate( ['/home', ' ' ], {fragment: ''});
-
   
   }
 
-  // aboutClicked() {
-  //   this.router.navigateByUrl('/home#about')
-  // }
 
 
 

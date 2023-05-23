@@ -5,7 +5,6 @@ import { BehaviorSubject, Observable, lastValueFrom } from "rxjs";
 import { AuthService } from "./auth.service";
 import { Auth, signInWithEmailAndPassword } from "@angular/fire/auth";
 import { FavoriteItem } from "../interfaces/favorite-item";
-// import { AuthService } from "./auth.service";
 
   
 @Injectable({providedIn: 'root'})

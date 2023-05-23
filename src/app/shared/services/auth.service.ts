@@ -44,14 +44,11 @@ export class AuthService {
 
   async login(email: string, password: string) {
     try{
-      // this.currentUser.next(await this.my_login(email, password));
       const id: string = (await this.my_login(email, password)).uid;
       this.userId.next(id);
-      // console.log('id', id)
       this.router.navigate(['/home']); 
       this.showNotification("", "Вы успешно зашли в свой аккаунт");
     }  catch(error){
-      // console.log('error', error)
       this.showNotification("Введен неверный email или пароль", "Вы не смогли войти в аккаунт")
       this.router.navigate(['/login']);
     }
@@ -69,7 +66,6 @@ export class AuthService {
       this.showNotification("", "Вы успешно зарегистрировались и зашли в свой аккаунт")
 
     } catch(error) {
-      // console.log(error)
       this.showNotification("", "Почта, которую вы ввели, уже используется или ее не существует");
       this.router.navigate(['/login']);
     }     

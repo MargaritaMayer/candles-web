@@ -7,24 +7,8 @@ import { AuthService } from '../shared/services/auth.service';
 import { BehaviorSubject, Observable, lastValueFrom } from 'rxjs';
 import { AccountService } from '../shared/services/account.service';
 import { Account } from '../shared/interfaces/account';
+import { TuiHideSelectedPipe } from '@taiga-ui/kit';
 
-class User {
-  constructor(readonly firstName: string, readonly lastName: string) {}
-
-  toString(): string {
-      return `${this.firstName} ${this.lastName}`;
-  }
-}
-
-class Account1 {
-  constructor(
-      readonly id: string,
-      readonly name: string,
-      readonly amount: number,
-      readonly currency: TuiCurrency,
-      readonly cardSvg: string,
-  ) {}
-}
 
 @Component({
   selector: 'app-account',
@@ -44,12 +28,20 @@ export class AccountComponent {
   public get accountInfo(): Observable<Account | null>{
     return this.accountService.account;
   }
+  public isChange = false;
   
   constructor(
     private store: AngularFirestore,
     private auth: AuthService,
     private accountService: AccountService
   ) {
+    this.accountInfo.subscribe((user) => {
+      this.testForm.patchValue({
+        'name': user?.name ?? '',
+        'phone': user?.phone ?? '',
+        'address': user?.address ?? ''
+      });
+    });
     this.auth.userId.subscribe((userId) => {
       if (userId === undefined) return;    
       this.isAuth = userId!==null;
@@ -58,58 +50,28 @@ export class AccountComponent {
 
   }
 
+  public testForm = new FormGroup({
+      name: new FormControl('', Validators.required),
+      phone: new FormControl('', Validators.required),
+      address: new FormControl('', Validators.required),
 
+  });
 
+  public submit() {
+    const name = this.testForm.get('name')?.value ?? ''
+    const phone = this.testForm.get('phone')?.value ?? ''
+    const address = this.testForm.get('address')?.value ?? ''
+    this.accountService.updateAccount({
+      'name': name,
+      'address': address,
+      'phone': phone,
+    })
+    this.changeInfo()
 
-  
-
-  readonly svgIcons = {
-    common: `https://ng-web-apis.github.io/dist/assets/images/common.svg`,
-    universal: `https://ng-web-apis.github.io/dist/assets/images/universal.svg`,
-    intersection: `https://ng-web-apis.github.io/dist/assets/images/intersection-observer.svg`,
-    mutation: `https://ng-web-apis.github.io/dist/assets/images/mutation-observer.svg`,
-};
-
-persons = [new User(`Roman`, `Sedov`), new User(`Alex`, `Inkin`)];
-
-accounts = [
-    new Account1(`1`, `Common`, 24876.55, TuiCurrency.Ruble, this.svgIcons.common),
-    new Account1(`2`, `Universal`, 335, TuiCurrency.Dollar, this.svgIcons.universal),
-    new Account1(
-        `3`,
-        `Intersection`,
-        10000,
-        TuiCurrency.Euro,
-        this.svgIcons.intersection,
-    ),
-    new Account1(`4`, `Mutation`, 100, TuiCurrency.Pound, this.svgIcons.mutation),
-];
-
-public testForm = new FormGroup({
-    nameValue: new FormControl(``, Validators.required),
-    textValue: new FormControl(``, Validators.required),
-    passwordValue: new FormControl(``, Validators.required),
-    phoneValue: new FormControl(``, Validators.required),
-    moneyValue: new FormControl(`100`, Validators.required),
-    periodValue: new FormControl(new TuiDay(2017, 2, 15), Validators.required),
-    timeValue: new FormControl(new TuiTime(12, 30), Validators.required),
-    personValue: new FormControl(this.persons[0]),
-    quantityValue: new FormControl(50_000, Validators.required),
-    radioValue: new FormControl(`with-commission`),
-    accountWherefrom: new FormControl(null),
-    accountWhere: new FormControl(null),
-    checkboxValue: new FormControl(false),
-    osnoValue: new FormControl(false),
-    usnValue: new FormControl(false),
-    eshnValue: new FormControl(false),
-    envdValue: new FormControl(false),
-    usn2Value: new FormControl(false),
-    patentValue: new FormControl(false),
-});
-
-public get nameValue() { return this.testForm?.get('nameValue'); }
-
-
+  }
+  public changeInfo() {
+    this.isChange=!this.isChange;
+  }
 
 
 }

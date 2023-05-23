@@ -24,7 +24,6 @@ export class ShopComponent implements OnInit{
   public isShowCandles = true;
 
   public candlesAvailable: Candle[] = [];
-  // public isShowAvailableCandles = false;
   public popularCandles: Candle[] = [];
   public popularAvailableCandles: Candle[] = [];
   public get candles() {

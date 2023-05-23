@@ -5,7 +5,6 @@ import { BehaviorSubject, Observable, lastValueFrom } from "rxjs";
 import { AuthService } from "./auth.service";
 import { Auth, signInWithEmailAndPassword } from "@angular/fire/auth";
 import { Account } from "../interfaces/account";
-// import { AuthService } from "./auth.service";
 
   
 @Injectable({providedIn: 'root'})
@@ -42,19 +41,12 @@ export class AccountService{
         const data: any = documentSnapshot.data();
 
         let account: Account = ({
-            "name": data.name ?? '',
-            "address": data.address ?? '',
+            "name": data?.name ?? '',
+            "address": data?.address ?? '',
+            "phone": data?.phone ?? '',
         });
 
-        // documentStream.forEach((d) => {
-        //     const data: any = d.data();
-        //     account["name"] = data.name ?? '';
-        //     account["name"] = data.name ?? '';
-        //     account = ({
-        //         "name": data.name ?? '',
-        //         "address": data.address ?? '',
-        //     });
-        // });
+     
         this._account.next(account);
         return account;
     }
@@ -68,6 +60,7 @@ export class AccountService{
         await this.store.collection(`/users/${this._userId}/info`).doc('info').update({
             "name": account.name,
             "address": account.address,
+            "phone": account.phone,
         });
         this.initialize();
     }

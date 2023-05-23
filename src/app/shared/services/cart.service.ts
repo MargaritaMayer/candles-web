@@ -5,7 +5,6 @@ import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { BehaviorSubject, Observable, lastValueFrom } from "rxjs";
 import { AuthService } from "./auth.service";
 import { Auth, signInWithEmailAndPassword } from "@angular/fire/auth";
-// import { AuthService } from "./auth.service";
 
   
 @Injectable({providedIn: 'root'})

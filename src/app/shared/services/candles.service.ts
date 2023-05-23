@@ -29,7 +29,6 @@ export class CandlesService{
             const data: any = d.data();
             res.push({"id": d.id, "title": data.title, "price": data.price, "imgs": data.imgs, 'isAvailable': data.isAvailable});
         });
-        // console.log(res);
         const candles: Candle[] = [];
         res.forEach((d) => { if (d) {
             candles.push(d);

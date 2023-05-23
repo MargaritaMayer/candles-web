@@ -26,7 +26,6 @@ export class CartComponent implements OnInit {
       if (userId === undefined) {
         return;
       }
-      // this._isLoading.next(false);
       this.isAuth = userId!==null;
       if (userId===null) {
         this._isLoading.next(false);
@@ -101,6 +100,4 @@ export class CartComponent implements OnInit {
   public getCandle(cartItem: CartItem) {
     return this.candles?.find(candle => candle.id === cartItem.idCandle)
   }
-
-  // public testValue = new FormControl(true);
  }
