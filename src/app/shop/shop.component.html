@@ -22,34 +22,25 @@
 
             
         </div>
-        <div (click)="popularCandle()">
-            <input type="radio" id="huey" name="drone" value="huey"
-                    checked>
-            <label for="huey">По популярности</label>
-        </div>
-
-        <div (click)="lowPriceCandle()">
-            <input type="radio" id="dewey" name="drone" value="dewey">
-            <label for="dewey">По возрастанию цены</label>
-        </div>
-
-        <div (click)="highPriceCandle()">
-            <input type="radio" id="louie" name="drone" value="louie">
-            <label for="louie">По убыванию цены</label>
-        </div>
-        <form class="b-form form__select" [formGroup]="secondForm" >
+        <form class="b-form form__select">
      
             <tui-select
-            tuiTextfieldSize="s"
-            [formControlName]="'choose'"
-            class="searchForm__year"
-            [readOnly]="true"
-          >
-            <tui-data-list-wrapper
-              *tuiDataList
-              [items]="items"
-            ></tui-data-list-wrapper>
-          </tui-select>
+                tuiTextfieldSize="m"
+                class="tui-space_vertical-4"
+                [formControl]="testValue"
+                [tuiTextfieldLabelOutside]="true"
+            >
+                Character
+                <input
+                    id="select"
+                    tuiTextfield
+                    placeholder="Choose your hero"
+                />
+                <tui-data-list-wrapper
+                    *tuiDataList
+                    [items]="items"
+                ></tui-data-list-wrapper>
+            </tui-select>
         </form>
         
         

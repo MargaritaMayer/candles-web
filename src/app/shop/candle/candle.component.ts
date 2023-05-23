@@ -8,6 +8,7 @@ import { CartService } from 'src/app/shared/services/cart.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { FavoriteItem } from 'src/app/shared/interfaces/favorite-item';
 import { FavoriteService } from 'src/app/shared/services/favorite.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-candle',
@@ -45,15 +46,12 @@ export class CandleComponent implements OnInit {
       this.router.navigate(['/login'])
       return;
     } 
-    if (!this._candle) return;
-    const selectWick = <HTMLSelectElement>document.getElementById('wick');
-    const wick = selectWick.options[selectWick.selectedIndex].text;
+    if (!this._candle || !this.formWick.value || 
+      !this.formScent.value  || !this.formPackaging.value) return;
 
-    const selectScent = <HTMLSelectElement>document.getElementById('scent');
-    const scent = selectScent.options[selectScent.selectedIndex].text;
-
-    const selectPackaging = <HTMLSelectElement>document.getElementById('packaging');
-    const packaging = selectPackaging.options[selectPackaging.selectedIndex].text;
+    const wick = this.formWick.value;
+    const scent = this.formScent.value;
+    const packaging = this.formPackaging.value;
 
     const favoriteItem: FavoriteItem = {
       'id': '', 
@@ -83,15 +81,11 @@ export class CandleComponent implements OnInit {
     this.auth.userId.subscribe(
     (userId) => {
       this.userId = userId;
-    }
-    )
+    })
+
     
-  }
 
-  public ShowCollapse(id: string) {
-   
   }
-
   public showAddImg(id: number) {
   }
 
@@ -101,16 +95,14 @@ export class CandleComponent implements OnInit {
       this.router.navigate(['/login'])
       return;
     } 
+    if (!this._candle || !this.formWick.value || 
+      !this.formScent.value  || !this.formPackaging.value) {
+        return;
+      }
     this.auth.showNotification("", "Товар добавлен в корзину");
-    if (!this._candle) return;
-    const selectWick = <HTMLSelectElement>document.getElementById('wick');
-    const wick = selectWick.options[selectWick.selectedIndex].text;
-
-    const selectScent = <HTMLSelectElement>document.getElementById('scent');
-    const scent = selectScent.options[selectScent.selectedIndex].text;
-
-    const selectPackaging = <HTMLSelectElement>document.getElementById('packaging');
-    const packaging = selectPackaging.options[selectPackaging.selectedIndex].text;
+    const wick = this.formWick.value;
+    const scent = this.formScent.value;
+    const packaging = this.formPackaging.value;
 
     const cartItem: CartItem = {
       'id': '', 
@@ -128,4 +120,24 @@ export class CandleComponent implements OnInit {
   changeCount(count: number){
     this.count = count;
   }
+
+  public itemsWick = [
+    'Хлопковый',
+    'Деревянный',   
+  ];
+  formWick = new FormControl("Хлопковый");
+
+  public itemsScent = [
+    'Лавандовое поле',
+    'Груша в карамели', 
+    'Домашнее какао',
+    'Зеленый чай',  
+  ];
+  formScent = new FormControl("Лавандовое поле");
+ 
+  public itemsPackaging = [
+    'Стандартная',
+    'Подарочная',   
+  ];
+  formPackaging = new FormControl("Стандартная");
 }

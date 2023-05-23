@@ -22,42 +22,94 @@
         <p class="candle__price">{{candle?.price}} ₽</p>
 
         <div>
-            <label for="wick">Фитиль</label>
+            <p class="selector-p" for="wick">Фитиль</p>
         </div>
-        <select class="select1" id="wick" name="carlist" form="carform">
-          <option value="opel">Хлопковый</option>
-          <option value="audi">Деревянный</option>
-        </select>
 
-        <div>
-            <label for="scent">Аромат</label>
-        </div>
-        <select class="select1" id="scent" name="carlist" form="carform">
-          <option value="opel">Лавандовое поле</option>
-          <option value="audi">Груша в карамели</option>
-          <option value="audi">Домашнее какао</option>
-          <option value="audi">Зеленый чай</option>
-        </select>
+        <form class="b-form form__select">
+     
+          <tui-select
+              tuiTextfieldSize="m"
+                class="tui-space_vertical-4"
+                [formControl]="formWick"
+                [tuiTextfieldLabelOutside]="true"
+            >
+                Character
+                <input
+                    id="select"
+                    tuiTextfield
+                    placeholder="Choose your hero"
+                />
+                <tui-data-list-wrapper
+                    *tuiDataList
+                    [items]="itemsWick"
+                ></tui-data-list-wrapper>
+            </tui-select>
+        </form>
 
-        <div>
-            <label for="packaging">Упаковка</label>
-        </div>
-        <select class="select1" id="packaging" name="carlist" form="carform">
-          <option value="opel">Стандартная</option>
-          <option value="audi">Подарочная</option>
-        </select>
-
-        <p>Свеча HYPE — это свеча конструктор, где вы можете выбрать цвет, аромат, надпись на свече и фитиль! Огонь? Огонь! Собери свое уникальное сочетание свечи!</p>
-        <p>Свеча “I can Buy myself flowers” всегда есть в наличии:</p>
-        <p>Розовая — Кожа и сандал — Хлопковый фитиль</p>
-        <p>Фиолетовая — Ваниль и бобы тонка — Хлопковый фитиль</p>
-        <p>Желтая — Рубиновый грейпфрут — Хлопковый фитиль</p>
-        <p>Оранжевая — Ягодный лимонад — Хлопковый фитиль</p>
-        <p>Зеленая — Мандарин и базилик — Хлопковый фитиль</p>
-        <p>Голубая — Пич блоссом — Хлопковый фитиль</p>    
-        <p>Ярко - розовая — Кашемировый уют — Хлопковый фитиль</p>
         
-        <p class="favorites link" (click)="addFavorite()">В избранное</p>
+
+        <div>
+            <p class="selector-p" for="scent">Аромат</p>
+        </div>
+      <form class="b-form form__select">
+        <tui-select
+              tuiTextfieldSize="m"
+                class="tui-space_vertical-4"
+                [formControl]="formScent"
+                [tuiTextfieldLabelOutside]="true"
+            >
+                Character
+                <input
+                    id="select"
+                    tuiTextfield
+                    placeholder="Choose your hero"
+                />
+                <tui-data-list-wrapper
+                    *tuiDataList
+                    [items]="itemsScent"
+                ></tui-data-list-wrapper>
+            </tui-select>
+        </form>
+        
+     
+        <div>
+            <p class="selector-p" for="packaging">Упаковка</p>
+        </div>
+
+        <form class="b-form form__select">
+          <tui-select
+                tuiTextfieldSize="m"
+                  class="tui-space_vertical-4"
+                  [formControl]="formPackaging"
+                  [tuiTextfieldLabelOutside]="true"
+                  appearance="custom"
+              >
+                  Character
+                  <input
+                      id="select"
+                      tuiTextfield
+                      placeholder="Choose your hero"
+                  />
+                  <tui-data-list-wrapper
+                      *tuiDataList
+                      [items]="itemsPackaging"
+                  ></tui-data-list-wrapper>
+              </tui-select>
+          </form>
+          
+    
+        <p class="fs main-info"><b>Свеча HYPE</b> — это свеча конструктор, где вы можете выбрать цвет, аромат, надпись на свече и фитиль! Огонь? Огонь! Собери свое уникальное сочетание свечи!</p>
+        <p class="fs"> 
+          <!-- <span>Свеча “</span><b>{{candle?.title}}</b><span>” всегда есть в наличии:</span></p>
+        <p class="fs">Розовая — Кожа и сандал — Хлопковый фитиль</p>
+        <p class="fs">Фиолетовая — Ваниль и бобы тонка — Хлопковый фитиль</p>
+        <p class="fs">Желтая — Рубиновый грейпфрут — Хлопковый фитиль</p>
+        <p class="fs">Оранжевая — Ягодный лимонад — Хлопковый фитиль</p>
+        <p class="fs">Зеленая — Мандарин и базилик — Хлопковый фитиль</p>
+        <p class="fs">Голубая — Пич блоссом — Хлопковый фитиль</p>    
+        <p class="fs">Ярко - розовая — Кашемировый уют — Хлопковый фитиль</p> -->
+        
+        <p class="favorites link " (click)="addFavorite()">В избранное</p>
         <div class="cart-item__counter">
           <app-counter-wrapper 
           (countEvent)="changeCount($event)" 

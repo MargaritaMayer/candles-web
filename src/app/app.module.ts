@@ -23,8 +23,8 @@ import { RouterModule } from '@angular/router';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { CandleModule } from './shop/candle/candle.module';
 import { ContactsModule } from './contacts/contacts.module';
-import { TuiAlertModule, TuiButtonModule, TuiRootModule } from '@taiga-ui/core';
-import { TuiInputModule } from '@taiga-ui/kit';
+import { TuiAlertModule, TuiButtonModule, TuiLoaderModule, TuiRootModule } from '@taiga-ui/core';
+import { TuiCarouselModule, TuiInputModule, TuiIslandModule, TuiMarkerIconModule } from '@taiga-ui/kit';
 import { TuiLetModule } from '@taiga-ui/cdk';
 import { AboutComponent } from './about/about.component';
 import { AboutModule } from './about/about.module';
@@ -66,6 +66,11 @@ import { FavoritesModule } from './favorites/favorites.module';
     TuiAlertModule,
     AboutModule,
     FavoritesModule,
+    TuiCarouselModule,
+    TuiIslandModule,
+    TuiMarkerIconModule,
+    TuiLoaderModule,
+    TuiButtonModule,
 
   ],
   providers: [

@@ -39,7 +39,7 @@
         <app-counter-wrapper 
             (countEvent)="changeCount($event)"
             class="cart-item__counter"
-            [count]="cartItem?.count ?? 1">
+            [count]="cartItem!.count!">
         </app-counter-wrapper>
     </td>
 </tr>

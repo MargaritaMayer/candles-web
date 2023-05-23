@@ -27,8 +27,6 @@ export class ShopComponent implements OnInit{
   // public isShowAvailableCandles = false;
   public popularCandles: Candle[] = [];
   public popularAvailableCandles: Candle[] = [];
-  public selectValue: null | string = null;
-  public select: HTMLSelectElement | null = null;
   public get candles() {
     return this._candles;
   }
@@ -39,18 +37,16 @@ export class ShopComponent implements OnInit{
     private changeDetectorRef: ChangeDetectorRef
   ) {}
   async ngOnInit(): Promise<void>  {
+    this.testValue.valueChanges.subscribe((selectValue) => { 
+      if (!selectValue) return;
+      this.clickSelect(selectValue)
+    });
     this._candles = await this.candlesService.candles;
     this._candles = [... this._candles];
     this.candlesAvailable = this._candles.filter(c => c.isAvailable);
     this.popularCandles = [... this._candles];
     this.popularAvailableCandles = [... this.candlesAvailable]
-    this.changeDetectorRef.detectChanges();
-    // this.select = <HTMLSelectElement>document.getElementById('select');
-
-    // this.select.addEventListener('change', (val) => {
-    //   console.log(val);
-    // });
-    
+    this.changeDetectorRef.detectChanges();   
   
   }
   form = new FormGroup({
@@ -87,7 +83,7 @@ export class ShopComponent implements OnInit{
   public showAvailableCandles(){
     this.form.value.isShowAvailableCandles = ! this.form.value.isShowAvailableCandles;
     this._isShowAvailableCandles.next(this.form.value.isShowAvailableCandles);
-    // console.log(this.testValue.value);
+
 
   }
 
@@ -107,23 +103,16 @@ export class ShopComponent implements OnInit{
     this.candlesAvailable = [...this.popularAvailableCandles];
     
   }
-  clickSelect(){
-    console.log("changed")
-    // const select = <HTMLSelectElement>document.getElementById('select');
-    // this.selectValue = select.options[select.selectedIndex].text;  
-    // console.log("hi", select)
-    
-    // this.selectValue = select.options[select.selectedIndex].text;   
-    // console.log(this.selectValue)
-    // if (this.selectValue==='По популярности'){
-    //   this.popularCandle()
-    // }
-    // if (this.selectValue==='По возрастанию цены'){
-    //   this.highPriceCandle()
-    // }
-    // if (this.selectValue==='По убыванию цены'){
-    //   this.lowPriceCandle()
-    // }
+  clickSelect(selectValue: string){
+    if (selectValue==='По популярности'){
+      this.popularCandle()
+    }
+    if (selectValue==='По возрастанию цены'){
+      this.highPriceCandle()
+    }
+    if (selectValue==='По убыванию цены'){
+      this.lowPriceCandle()
+    }
   }
   
 
@@ -135,11 +124,6 @@ export class ShopComponent implements OnInit{
     
   ];
 
-  secondForm = new FormGroup({
-    choose: new FormControl<string>("По популярности")
-  });
-
-
-  // testValue = new FormControl();
+  testValue = new FormControl("По популярности");
  
 }

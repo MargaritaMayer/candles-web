@@ -5,8 +5,9 @@ import { CandleComponent } from './candle.component';
 import { RouteModule } from '../../route/route.module';
 import { LoginModule } from '../../login/login.module';
 import { ShopItemModule } from '../shop-item/shop-item.module';
-import { TuiAccordionModule } from '@taiga-ui/kit';
-import { TuiButtonModule } from '@taiga-ui/core';
+import { TuiAccordionModule, TuiDataListWrapperModule, TuiSelectModule } from '@taiga-ui/kit';
+import { TuiButtonModule, TuiHostedDropdownModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -20,6 +21,13 @@ import { TuiButtonModule } from '@taiga-ui/core';
         CounterWrapperModule,
         TuiAccordionModule,
         TuiButtonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        TuiHostedDropdownModule,
+        TuiDataListWrapperModule,
+        TuiSelectModule,
+        TuiTextfieldControllerModule,
+        
 
     ],
     exports: [
