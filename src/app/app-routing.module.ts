@@ -10,6 +10,7 @@ import { FaqComponent } from './faq/faq.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AboutComponent } from './about/about.component';
 import { FavoritesComponent } from './favorites/favorites.component';
+import { AccountComponent } from './account/account.component';
 
 
 const appRoute: Routes = [
@@ -22,8 +23,9 @@ const appRoute: Routes = [
   {path: 'candle', title: 'Свеча', component: CandleComponent},
   {path: 'contacts', title: 'Контакты', component: ContactsComponent},
   {path: 'faq', title: 'Вопросы и ответы', component: FaqComponent},
-  {path: 'about', title: 'О магазине', component: AboutComponent},
+  {path: 'about', title: 'О бренде', component: AboutComponent},
   {path: 'favorites', title: 'Избранное', component: FavoritesComponent},
+  {path: 'account', title: 'Личный аккаунт', component: AccountComponent},
 
   
 

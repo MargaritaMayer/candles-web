@@ -33,6 +33,11 @@
                 <li class="menu__left-item">
                     <a class='link' routerLink="/contacts">Контакты</a>
                 </li>
+
+                <li class="menu__left-item" [hidden]="logText==='Войти'">
+                    <a class='link' routerLink="/account">Аккаунт</a>
+                </li>
+
                 <li class="menu__left-item">
                     <a id="login" class='link'>{{logText}}</a>
                 </li>

@@ -1,0 +1,43 @@
+.central-container{
+    width: 1000px;
+    margin: auto;
+}
+
+.account__title{
+    font-size: 28px;
+    margin: 40px 0;
+}
+
+.account__line{
+    font-size: 18px;
+}
+
+
+@import '@taiga-ui/styles/taiga-ui-global.less';
+
+@import '@taiga-ui/core/styles/taiga-ui-local.less';
+
+:host {
+    display: block;
+}
+
+.stepper {
+    margin-bottom: 2rem;
+}
+
+.uppercase-name {
+    text-transform: uppercase;
+}
+
+.account {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+}
+
+.ticks-labels {
+    .tui-slider-ticks-labels();
+
+    color: var(--tui-text-02);
+    margin-top: 0.25rem;
+}

@@ -78,7 +78,6 @@ export class CartComponent implements OnInit {
 
     this.cartService.cartItems.subscribe(
       async (cartItems) => {
-        console.log(cartItems);
         if (cartItems === null) return;
         this.cartItems = cartItems
         this.summary = await this.candlesService.calculateCartSum(cartItems);

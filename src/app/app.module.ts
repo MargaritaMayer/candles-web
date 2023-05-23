@@ -23,13 +23,15 @@ import { RouterModule } from '@angular/router';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { CandleModule } from './shop/candle/candle.module';
 import { ContactsModule } from './contacts/contacts.module';
-import { TuiAlertModule, TuiButtonModule, TuiLoaderModule, TuiRootModule } from '@taiga-ui/core';
-import { TuiCarouselModule, TuiInputModule, TuiIslandModule, TuiMarkerIconModule } from '@taiga-ui/kit';
+import { TuiAlertModule, TuiButtonModule, TuiGroupModule, TuiHintModule, TuiLoaderModule, TuiRootModule, TuiTextfieldControllerModule } from '@taiga-ui/core';
+import { TuiCarouselModule, TuiCheckboxBlockModule, TuiDataListWrapperModule, TuiFieldErrorPipeModule, TuiInputModule, TuiInputSliderModule, TuiIslandModule, TuiMarkerIconModule, TuiSelectModule, TuiStepperModule } from '@taiga-ui/kit';
 import { TuiLetModule } from '@taiga-ui/cdk';
 import { AboutComponent } from './about/about.component';
 import { AboutModule } from './about/about.module';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { FavoritesModule } from './favorites/favorites.module';
+import { AccountComponent } from './account/account.component';
+import { AccountModule } from './account/account.module';
 
 
 @NgModule({
@@ -71,6 +73,17 @@ import { FavoritesModule } from './favorites/favorites.module';
     TuiMarkerIconModule,
     TuiLoaderModule,
     TuiButtonModule,
+    AccountModule,
+    
+    TuiCheckboxBlockModule,
+    TuiFieldErrorPipeModule,
+    TuiInputSliderModule,
+    TuiSelectModule,
+    TuiDataListWrapperModule,
+    TuiGroupModule,
+    TuiStepperModule,
+    TuiTextfieldControllerModule,
+    TuiHintModule,
 
   ],
   providers: [

@@ -25,7 +25,6 @@ export class FavoritesComponent implements OnInit {
       if (userId === undefined) {
         return;
       }
-      // this._isLoading.next(false);
       this.isAuth = userId!==null;
       if (userId===null) {
         this._isLoading.next(false);

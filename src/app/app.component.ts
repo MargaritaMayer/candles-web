@@ -33,6 +33,7 @@ export class AppComponent implements OnInit{
         if (userId===null) {
           this._loginText.next('Войти');      
         } else {
+          
           this._loginText.next("Выйти");          
         }
         login?.addEventListener('click', (_) => {

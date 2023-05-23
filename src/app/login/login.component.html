@@ -9,6 +9,25 @@
     <p class="content__forgot-password link" (click)="resetPassword()" [hidden]="isNewUser || isResetPassword">Забыли пароль?</p>
 
     <p class="form__info form__text" [hidden]="!isNewUser">{{formText}} </p>
+
+    <div class="content__input" [hidden]="!isNewUser">
+        <tui-input 
+            formControlName="name">
+            Введите свое имя
+            <input
+                tuiTextfield
+            />
+        </tui-input>
+        
+        <div *ngIf="name?.invalid && (name?.dirty || name?.touched)"
+            class="alert">
+            <div *ngIf="email!.errors?.['required']">
+                поле обязательно для заполнения
+            </div>
+        </div>
+    </div>
+
+
     <div class="content__input">
         <tui-input 
             formControlName="email">

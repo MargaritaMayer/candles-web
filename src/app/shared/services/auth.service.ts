@@ -5,17 +5,18 @@ import { CartService } from './cart.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { BehaviorSubject } from 'rxjs';
 import { TuiAlertService } from '@taiga-ui/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 
 @Injectable({ providedIn: 'root'})
 export class AuthService {
-  // public currentUser: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
   public userId: BehaviorSubject<string | null | undefined> =  new BehaviorSubject<string | null | undefined>(undefined);
 
   constructor(
     private auth: Auth, 
     private router: Router, 
     private fireauth: AngularFireAuth,
+    private store: AngularFirestore,
     @Inject(TuiAlertService) private readonly alerts: TuiAlertService,
     ) {
       this.fireauth.authState.subscribe((user) => {
@@ -46,24 +47,29 @@ export class AuthService {
       // this.currentUser.next(await this.my_login(email, password));
       const id: string = (await this.my_login(email, password)).uid;
       this.userId.next(id);
+      // console.log('id', id)
       this.router.navigate(['/home']); 
       this.showNotification("", "Вы успешно зашли в свой аккаунт");
     }  catch(error){
+      // console.log('error', error)
       this.showNotification("Введен неверный email или пароль", "Вы не смогли войти в аккаунт")
       this.router.navigate(['/login']);
     }
   }
 
 
-  async register(email: string, password: string) {
+  async register(name: string, email: string, password: string) {
     try {
       const id: string = (await this.my_register(email, password)).uid;
       this.userId.next(id);
+      await this.store.collection(`/users/${id}/info`).doc('info').set({
+        "name": name
+      });
       this.router.navigate(['/home']);
       this.showNotification("", "Вы успешно зарегистрировались и зашли в свой аккаунт")
 
     } catch(error) {
-
+      // console.log(error)
       this.showNotification("", "Почта, которую вы ввели, уже используется или ее не существует");
       this.router.navigate(['/login']);
     }     
