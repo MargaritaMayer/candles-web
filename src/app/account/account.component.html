@@ -1,18 +1,19 @@
 <app-route [name]="'Аккаунт'"></app-route>
+<ng-container *tuiLet="accountInfo | async as accInfo">
 
 <div [hidden]="isAuth">
     Вы не авторизованы
 </div>
 <div [hidden]="!isAuth">
 
-    <div [hidden]="!((accountInfo | async)===null)" class="loader">
+    <div [hidden]="!(accInfo===null)" class="loader">
         <div  class="lds-ring" ><div></div><div></div><div></div><div></div></div>
     </div>
     
-    <div [hidden]="((accountInfo | async)===null)" class="central-container">
+    <div [hidden]="(accInfo===null)" class="central-container">
         <h1 class="account__title">Мой аккаунт</h1>
-        <p class="account__line">Имя: {{(accountInfo | async)?.name}}</p>
-        <p class="account__line">Адрес: {{(accountInfo | async)?.address}}</p>
+        <p class="account__line">Имя: {{accInfo?.name}}</p>
+        <p class="account__line">Адрес: {{accInfo?.address}}</p>
     
         <p class="account__line">Изменить</p>
     </div>
@@ -21,30 +22,7 @@
 
 </div>
 
-<div class="tui-container">
-    <div class="stepper">
-        <tui-stepper [activeItemIndex]="0">
-            <button tuiStep>First step</button>
-            <button
-                tuiStep
-                [disabled]="true"
-            >
-                Second step
-            </button>
-            <button
-                tuiStep
-                [disabled]="true"
-            >
-                Third step
-            </button>
-            <button
-                tuiStep
-                [disabled]="true"
-            >
-                Fourth step
-            </button>
-        </tui-stepper>
-    </div>
+    <div class="tui-container">
 
 
     <form [formGroup]="testForm">
@@ -80,43 +58,8 @@
                         formControlName="periodValue"
                     ></tui-error>
                 </div>
-                <div class="tui-form__row tui-form__row_multi-fields">
-                    <div class="tui-form__multi-field">
-                        <tui-input-password formControlName="passwordValue">Input password</tui-input-password>
-                        <tui-error
-                            formControlName="passwordValue"
-                        ></tui-error>
-                    </div>
-                    <div class="tui-form__multi-field">
-                        <tui-input-number
-                            formControlName="moneyValue"
-                        >
-                            Input money
-                        </tui-input-number>
-                        <tui-error
-                            formControlName="moneyValue"
-                        ></tui-error>
-                    </div>
-                </div>
-                <div class="tui-form__row">
-                    <tui-input-slider
-                        formControlName="quantityValue"
-                        tuiTextfieldPostfix="₽"
-                        [min]="50000"
-                        [max]="3000000"
-                        [segments]="1"
-                    >
-                        Some slider
-                    </tui-input-slider>
-                    <div class="ticks-labels">
-                        <span>from 50 000 ₽</span>
-                        <span>to 3 000 000 ₽</span>
-                    </div>
-                    <div class="tui-form__field-note">Some additional text</div>
-                    <tui-error
-                        formControlName="quantityValue"
-                    ></tui-error>
-                </div>
+           
+                
                 <div class="tui-form__row tui-form__row_multi-fields">
                     <div class="tui-form__multi-field">
                         <tui-select
@@ -171,9 +114,7 @@
                         An alternative one
                     </tui-radio-block>
                 </div>
-                <div class="tui-form__row tui-form__row_half-width">
-                    <tui-input-time formControlName="timeValue">Input time</tui-input-time>
-                </div>
+                
                 <div class="tui-form__row tui-form__row_checkboxes">
                     <tui-checkbox-labeled
                         formControlName="osnoValue"
@@ -229,16 +170,6 @@
                 </div>
                 <h3 class="tui-form__header">Header</h3>
                 <div class="tui-form__row">
-                    <tui-input
-                        formControlName="textValue"
-                        tuiHintContent="A tooltip"
-                    >
-                        Textfield
-                        <input
-                            tuiTextfield
-                            placeholder="Placeholder"
-                        />
-                    </tui-input>
                     <div class="tui-form__field-checkbox">
                         <tui-checkbox-labeled
                             formControlName="checkboxValue"
@@ -274,13 +205,12 @@
             let-account
         >
             <span class="account">
-                <!-- {{ account.name }} -->
             </span>
         </ng-template>
     </form>
 </div>
 
-
+</ng-container>
 
 
 

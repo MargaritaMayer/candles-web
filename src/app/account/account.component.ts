@@ -85,7 +85,7 @@ accounts = [
     new Account1(`4`, `Mutation`, 100, TuiCurrency.Pound, this.svgIcons.mutation),
 ];
 
-testForm = new FormGroup({
+public testForm = new FormGroup({
     nameValue: new FormControl(``, Validators.required),
     textValue: new FormControl(``, Validators.required),
     passwordValue: new FormControl(``, Validators.required),
@@ -106,4 +106,10 @@ testForm = new FormGroup({
     usn2Value: new FormControl(false),
     patentValue: new FormControl(false),
 });
+
+public get nameValue() { return this.testForm?.get('nameValue'); }
+
+
+
+
 }
