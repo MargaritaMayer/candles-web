@@ -107,10 +107,10 @@ export class ShopComponent implements OnInit{
       this.popularCandle()
     }
     if (selectValue==='По возрастанию цены'){
-      this.highPriceCandle()
+      this.lowPriceCandle()
     }
     if (selectValue==='По убыванию цены'){
-      this.lowPriceCandle()
+      this.highPriceCandle()
     }
   }
   
@@ -120,7 +120,6 @@ export class ShopComponent implements OnInit{
     'По популярности',
     'По возрастанию цены',
     'По убыванию цены',
-    
   ];
 
   testValue = new FormControl("По популярности");
