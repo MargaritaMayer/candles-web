@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-route',
@@ -6,12 +6,31 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./route.component.less']
 })
-export class RouteComponent {
-  @Input()
-  public name: string = "";
+export class RouteComponent{
+
+  public items: {caption: string, routerLink?: string}[] = []
 
   @Input()
-  public isCandle: boolean = false;
-  
+  set name(name: string) {
+    this.items = [
+      {
+          caption: 'Home',
+          routerLink: '/home',
+      },
+      {
+          caption: name,
+      },
+    ];
+    if (this.isCandle) {
+      this.items.splice(
+        1, 0, {
+          caption: 'Свечи',
+          routerLink: '/shop',
+        },);
+    }
 
+  }
+
+  @Input()
+  public isCandle = false;
 }
