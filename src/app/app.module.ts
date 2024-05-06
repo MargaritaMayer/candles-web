@@ -32,6 +32,7 @@ import { FavoritesComponent } from './favorites/favorites.component';
 import { FavoritesModule } from './favorites/favorites.module';
 import { AccountComponent } from './account/account.component';
 import { AccountModule } from './account/account.module';
+import { LoaderModule } from './loader/loader.module';
 
 
 @NgModule({
@@ -45,8 +46,8 @@ import { AccountModule } from './account/account.module';
     TuiRootModule,
     TuiButtonModule,
     FormsModule,
-    ShopModule, 
-    HomeModule,  
+    ShopModule,
+    HomeModule,
     FooterModule,
     AppRoutingModule,
     ReactiveFormsModule,
@@ -59,7 +60,7 @@ import { AccountModule } from './account/account.module';
     provideFirebaseApp(() => getApp()),
     provideFirestore(() => getFirestore()),
     AngularFirestoreModule,
-  
+
     ContactsModule,
     TuiLetModule,
     TuiAlertModule,
@@ -71,7 +72,7 @@ import { AccountModule } from './account/account.module';
     TuiLoaderModule,
     TuiButtonModule,
     AccountModule,
-    
+
     TuiCheckboxBlockModule,
     TuiFieldErrorPipeModule,
     TuiInputSliderModule,
@@ -86,7 +87,7 @@ import { AccountModule } from './account/account.module';
   providers: [
   ],
   bootstrap: [AppComponent],
-  
+
 
 })
 export class AppModule { }

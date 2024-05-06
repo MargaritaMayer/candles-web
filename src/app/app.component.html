@@ -1,13 +1,14 @@
 <tui-root>
     <ng-container *tuiLet="isLoading | async as isLoad">
-    <div [hidden]="!isLoad" class="loader">
-    <div  class="lds-ring" ><div></div><div></div><div></div><div></div></div>
-</div>
+      <!-- <app-loader [hidden]="!isLoad" class="loader"></app-loader> -->
+      <div [hidden]="!isLoad" class="loader">
+        <div  class="lds-ring" ><div></div><div></div><div></div><div></div></div>
+      </div>
 
 <div [hidden]="isLoad" class="content">
     <header class="header">
         <div class="header__info">
-            <p class="header__text">БЕСПЛАТНАЯ ДОСТАВКА ДО ПУНКТА ВЫДАЧИ ОТ 7000 РУБ. | ВСЕ СВЕЧИ ИЗГОТАВЛИВАЕМ НА ЗАКАЗ ЗА 3 — 4 РАБОЧИХ ДНЯ</p>      
+            <p class="header__text">БЕСПЛАТНАЯ ДОСТАВКА ДО ПУНКТА ВЫДАЧИ ОТ 7000 РУБ. | ВСЕ СВЕЧИ ИЗГОТАВЛИВАЕМ НА ЗАКАЗ ЗА 3 — 4 РАБОЧИХ ДНЯ</p>
         </div>
         <div class="header__menu menu" *tuiLet="loginText | async as logText">
 
@@ -49,7 +50,7 @@
 
 
     <router-outlet></router-outlet>
-     
+
     <app-footer></app-footer>
 
 </div>

@@ -26,9 +26,6 @@ const appRoute: Routes = [
   {path: 'about', title: 'О бренде', component: AboutComponent},
   {path: 'favorites', title: 'Избранное', component: FavoritesComponent},
   {path: 'account', title: 'Личный аккаунт', component: AccountComponent},
-
-  
-
   {path: '**', component: PageNotFoundComponent},
 ]
 

@@ -19,7 +19,7 @@ export class CandleComponent implements OnInit {
 
   public _candle : Candle | null = null;
   public count = 1;
-  public userId: string | null | undefined = "";  
+  public userId: string | null | undefined = "";
   public idMainImg = 0;
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -45,8 +45,8 @@ export class CandleComponent implements OnInit {
       this.auth.showNotification("Чтобы добавить товар в избранное, пожалуйста, авторизируйтесь", "Вам необходимо авторизироваться");
       this.router.navigate(['/login'])
       return;
-    } 
-    if (!this._candle || !this.formWick.value || 
+    }
+    if (!this._candle || !this.formWick.value ||
       !this.formScent.value  || !this.formPackaging.value) return;
 
     const wick = this.formWick.value;
@@ -54,48 +54,45 @@ export class CandleComponent implements OnInit {
     const packaging = this.formPackaging.value;
 
     const favoriteItem: FavoriteItem = {
-      'id': '', 
-      'idCandle': this._candle.id || '', 
+      'id': '',
+      'idCandle': this._candle.id || '',
       'wick': wick,
       'scent': scent,
       'packaging': packaging,
     }
-    
+
     this.favoriteService.addFavoriteItem(favoriteItem);
 
 
   }
 
   async ngOnInit(): Promise<void> {
-    
+
     const id = this.activatedRoute.snapshot.paramMap.get('id');
-    
+
     if (id){
       const candles = await this.candlesService.candles;
-      this._candle = candles.find(c => c.id === id) || null;
+      this._candle = candles['candles-1'].find(c => c.id === id) || null;
       if (this._candle===null){
         this.router.navigate(['/error']);
-      }      
-    } 
+      }
+    }
     this.changeDetectorRef.detectChanges();
     this.auth.userId.subscribe(
     (userId) => {
       this.userId = userId;
     })
 
-    
+
 
   }
-  public showAddImg(id: number) {
-  }
-
   public AddCartItem() {
     if (this.userId === null) {
       this.auth.showNotification("Чтобы добавить товар в корзину, пожалуйста, авторизируйтесь", "Вам необходимо авторизироваться");
       this.router.navigate(['/login'])
       return;
-    } 
-    if (!this._candle || !this.formWick.value || 
+    }
+    if (!this._candle || !this.formWick.value ||
       !this.formScent.value  || !this.formPackaging.value) {
         return;
       }
@@ -105,39 +102,39 @@ export class CandleComponent implements OnInit {
     const packaging = this.formPackaging.value;
 
     const cartItem: CartItem = {
-      'id': '', 
-      'idCandle': this._candle.id || '', 
+      'id': '',
+      'idCandle': this._candle.id || '',
       'count': this.count,
       'wick': wick,
       'scent': scent,
       'packaging': packaging,
     }
-    
+
     this.cartService.addCartItem(cartItem);
 
   }
- 
+
   changeCount(count: number){
     this.count = count;
   }
 
   public itemsWick = [
     'Хлопковый',
-    'Деревянный',   
+    'Деревянный',
   ];
   formWick = new FormControl("Хлопковый");
 
   public itemsScent = [
     'Лавандовое поле',
-    'Груша в карамели', 
+    'Груша в карамели',
     'Домашнее какао',
-    'Зеленый чай',  
+    'Зеленый чай',
   ];
   formScent = new FormControl("Лавандовое поле");
- 
+
   public itemsPackaging = [
     'Стандартная',
-    'Подарочная',   
+    'Подарочная',
   ];
   formPackaging = new FormControl("Стандартная");
 }

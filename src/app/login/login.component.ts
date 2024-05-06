@@ -97,9 +97,6 @@ export class LoginComponent implements OnInit {
         this.auth.register(formData.name, formData.email, formData.password).then(() => {
        
         }, err => {
-        
-        // console.log(err);
-
         }) ;
         
       }  else {

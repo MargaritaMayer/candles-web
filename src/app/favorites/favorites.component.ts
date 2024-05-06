@@ -15,8 +15,8 @@ import { FormControl } from '@angular/forms';
 })
 export class FavoritesComponent implements OnInit {
 
-  constructor(    
-    public favoriteService: FavoriteService, 
+  constructor(
+    public favoriteService: FavoriteService,
     public candlesService: CandlesService,
     private changeDetectorRef: ChangeDetectorRef,
     public auth: AuthService,
@@ -30,23 +30,26 @@ export class FavoritesComponent implements OnInit {
         this._isLoading.next(false);
       }
     })
-  } 
- 
+  }
 
-  public candles: Candle[] | null = null; 
-  
-  public favoriteItems: FavoriteItem[] | null = null; 
-    
+
+  public candles: {
+    'candles-1': Candle[];
+    'candles-2': Candle[];
+} | null = null;
+
+  public favoriteItems: FavoriteItem[] | null = null;
+
   public isAuth: boolean = false;
 
 
   private _isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-  
+
   public get isLoading(): Observable<boolean>{
     return this._isLoading
   }
-  
-  
+
+
 
 
   async ngOnInit(): Promise<void> {
@@ -57,7 +60,7 @@ export class FavoritesComponent implements OnInit {
         if (favoriteItems === null) return;
         this.favoriteItems = favoriteItems
         this._isLoading.next(false);
-        
+
       }
       );
       this.changeDetectorRef.detectChanges();
@@ -66,12 +69,12 @@ export class FavoritesComponent implements OnInit {
   public deleteFavorite(id: string) {
     if (!this.favoriteItems) return;
     this.favoriteService.deleteItem(id);
-  }  
+  }
   testValue = new FormControl(true);
 
 
   public getCandle(favoriteItem: FavoriteItem) {
-    return this.candles?.find(candle => candle.id === favoriteItem.idCandle)
+    return this.candles?.['candles-1'].find(candle => candle.id === favoriteItem.idCandle)
   }
 
 

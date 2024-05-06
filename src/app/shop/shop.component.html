@@ -1,14 +1,15 @@
 <app-route [name]="'Свечи'"></app-route>
+<app-loader [hidden]='candles!==null'></app-loader>
 
-<div [hidden]='candles!==null' class="loader">
-    <div  class="lds-ring" ><div></div><div></div><div></div><div></div></div>
-</div>
-<div class="shop" [hidden]='candles===null'>
-    <div class="filter">
+<ng-container *tuiLet="isShowAvailable | async as isShowAvailable">
+
+  <div class="shop" >
+
+    <div class="filter" [hidden]='candles===null'>
         <div class="tui-space_bottom-2">
             <form [formGroup]="form">
                 <div>
-                    
+
                     <tui-toggle
                     (click)="showAvailableCandles()"
                     formControlName="isShowAvailableCandles"
@@ -20,10 +21,10 @@
                 </div>
             </form>
 
-            
+
         </div>
         <form class="b-form form__select">
-     
+
             <tui-select
                 tuiTextfieldSize="m"
                 class="tui-space_vertical-4"
@@ -42,28 +43,59 @@
                 ></tui-data-list-wrapper>
             </tui-select>
         </form>
-        
-        
-        
-        
-    </div>
-     <div class="container link" [hidden]="isShowAvailable | async">
-        <div class="shop-flex" [hidden]="!isShowCandles">        
-            <app-shop-item class="app-shop-item"
-                *ngFor="let c of candles" 
-                [candle]="c"
-                (clickAddCartItem) = "addCartItem($event)"  
-            ></app-shop-item>
-        </div>
-    </div>  
 
-    <div class="container link" [hidden]="!(isShowAvailable | async)">
-        <div class="shop-flex" [hidden]="!isShowCandles">        
+    </div>
+    <div class="shop-items">
+      <tui-tabs [(activeItemIndex)]="activeItemIndex">
+        <button
+            tuiTab
+            (click)="onClick('Maps')"
+        >
+
+            HOLIDAY COLLECTION
+        </button>
+
+          <button
+          tuiTab
+          (click)="onClick('Settings')"
+        >
+
+          HYPE COLLECTION
+        </button>
+      </tui-tabs>
+      <div class="container link" [hidden]="isShowAvailable || !isCandles1 ">
+          <div class="shop-flex">
+              <app-shop-item class="app-shop-item"
+                  ngIf="isShowAvailable; else showAllCandles"
+                  *ngFor="let c of candlesAvailable"
+                  [candle]="c"
+                  (clickAddCartItem) = "addCartItem($event)"
+              ></app-shop-item>
+              <app-shop-item #showAllCandles class="app-shop-item"
+                  *ngFor="let c of candles?.['candles-1']"
+                  [candle]="c"
+                  (clickAddCartItem) = "addCartItem($event)"
+              ></app-shop-item>
+          </div>
+      </div>
+
+      <div class="container link" [hidden]="isShowAvailable || isCandles1 ">
+        <div class="shop-flex">
             <app-shop-item class="app-shop-item"
-                *ngFor="let c of candlesAvailable" 
+                  ngIf="isShowAvailable; else showAllCandles"
+                  *ngFor="let c of candlesAvailable"
+                  [candle]="c"
+                  (clickAddCartItem) = "addCartItem($event)"
+              ></app-shop-item>
+            <app-shop-item class="app-shop-item"
+                *ngFor="let c of candles?.['candles-2']"
                 [candle]="c"
-                (clickAddCartItem) = "addCartItem($event)"  
+                (clickAddCartItem) = "addCartItem($event)"
             ></app-shop-item>
         </div>
-    </div>  
-</div>
+    </div>
+
+    </div>
+
+  </div>
+</ng-container>

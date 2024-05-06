@@ -16,8 +16,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class CartComponent implements OnInit {
 
-  constructor(    
-    public cartService: CartService, 
+  constructor(
+    public cartService: CartService,
     public candlesService: CandlesService,
     private changeDetectorRef: ChangeDetectorRef,
     public auth: AuthService,
@@ -31,7 +31,7 @@ export class CartComponent implements OnInit {
         this._isLoading.next(false);
       }
     })
-  } 
+  }
   form = new FormGroup({
     email: new FormControl<string | null>(null, [Validators.required, Validators.email]),
     name: new FormControl<string | null>(null, [Validators.required, Validators.minLength(5)]),
@@ -55,21 +55,24 @@ export class CartComponent implements OnInit {
   }
 
 
-  public candles: Candle[] | null = null; 
-  
-  public cartItems: CartItem[] | null = null; 
+  public candles: {
+    'candles-1': Candle[];
+    'candles-2': Candle[];
+}| null = null;
+
+  public cartItems: CartItem[] | null = null;
   public summary: number = 0;
-    
+
   public isAuth: boolean = false;
 
 
   private _isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-  
+
   public get isLoading(): Observable<boolean>{
     return this._isLoading
   }
-  
-  
+
+
 
 
   async ngOnInit(): Promise<void> {
@@ -81,7 +84,7 @@ export class CartComponent implements OnInit {
         this.cartItems = cartItems
         this.summary = await this.candlesService.calculateCartSum(cartItems);
         this._isLoading.next(false);
-        
+
       }
       );
       this.changeDetectorRef.detectChanges();
@@ -91,13 +94,13 @@ export class CartComponent implements OnInit {
     if (!this.cartItems) return;
     this.cartService.deleteItem(id);
     this.candlesService.calculateCartSum(this.cartItems);
-  }  
-  
-  public changeCount(cartItem: CartItem) {  
+  }
+
+  public changeCount(cartItem: CartItem) {
     this.cartService.updateCount(cartItem.id, cartItem.count);
   }
 
   public getCandle(cartItem: CartItem) {
-    return this.candles?.find(candle => candle.id === cartItem.idCandle)
+    return this.candles?.['candles-1'].find(candle => candle.id === cartItem.idCandle)
   }
  }
