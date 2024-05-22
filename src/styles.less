@@ -1,9 +1,45 @@
+@import '@taiga-ui/core/styles/taiga-ui-local.less';
+@import '@taiga-ui/styles/taiga-ui-global.less';
+
+[tuiButton][data-appearance='custom']{
+    padding: 9px;
+    margin-top: 10px;
+    background-color: #f6daf9;
+    .t-wrapper {
+        cursor: default;
+    }
+}
+:root {
+    --tui-info-bg:  #ef9da41d;
+    --tui-primary:#bc71c9;
+    --tui-primary-hover: #9e71c9;
+    --tui-primary-active: #6d63b5;
+}
 body {
     margin: 0;
     font-family: 'Roboto',Arial,sans-serif;
 }
+.link{
+    user-select: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+.text_bold{
+    font-weight: 800;
+}
+.container{
+    width: 1200px;
+}
+.wrap-img{
+    font-size: 0;
+}
 
-html {
-    scroll-behavior: smooth;
-  }
+[hidden]{
+    display:none;
+}
 
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

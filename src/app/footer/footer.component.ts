@@ -6,6 +6,4 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./footer.component.less']
 })
-export class FooterComponent {
-
-}
+export class FooterComponent {}

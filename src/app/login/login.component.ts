@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CartItem } from '../shared/interfaces/cart-item';
-import { AuthService } from '../shared/services/auth.service';
+
 import { Router } from '@angular/router';
 import { TuiValidationError } from '@taiga-ui/cdk';
 import { TUI_VALIDATION_ERRORS } from '@taiga-ui/kit';
@@ -17,7 +16,7 @@ import { TUI_VALIDATION_ERRORS } from '@taiga-ui/kit';
 export class LoginComponent implements OnInit {
   
   constructor( 
-    private auth: AuthService, 
+    // private auth: AuthService, 
     private router: Router, 
     ) { }
   ngOnInit(): void {
@@ -73,13 +72,13 @@ export class LoginComponent implements OnInit {
       
       if (!this.form.value.email) return;
 
-      this.auth.resetPassword(this.form.value.email).then(() => {
-        this.auth.showNotification("", "Письмо отправлено вам на почту")
-        this.router.navigate(['/home'])
-      }, err => {
-        this.auth.showNotification("Аккаунта с данной почтой не существует", 
-        "Почта не зарегистрирована")
-      }) 
+      // this.auth.resetPassword(this.form.value.email).then(() => {
+      //   this.auth.showNotification("", "Письмо отправлено вам на почту")
+      //   this.router.navigate(['/home'])
+      // }, err => {
+      //   this.auth.showNotification("Аккаунта с данной почтой не существует", 
+      //   "Почта не зарегистрирована")
+      // }) 
 
      
       
@@ -93,18 +92,18 @@ export class LoginComponent implements OnInit {
 
     if (formData.email && formData.password ) {
       this.isUser = true;
-      if (this.isNewUser && formData.name) {
-        this.auth.register(formData.name, formData.email, formData.password).then(() => {
+      // if (this.isNewUser && formData.name) {
+      //   this.auth.register(formData.name, formData.email, formData.password).then(() => {
        
-        }, err => {
+      //   }, err => {
         
-        // console.log(err);
+      //   // console.log(err);
 
-        }) ;
+      //   }) ;
         
-      }  else {
-        this.auth.login(formData.email, formData.password)
-      }    
+      // }  else {
+      //   this.auth.login(formData.email, formData.password)
+      // }    
     
     } 
     this.form.reset();

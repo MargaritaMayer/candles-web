@@ -5,11 +5,11 @@ import { RouterModule } from '@angular/router';
 
 @NgModule({
     declarations: [
-        FooterComponent
+        FooterComponent,
     ],
     imports: [
         CommonModule, 
-        RouterModule,  
+        RouterModule,
     ],
     exports: [
         FooterComponent,

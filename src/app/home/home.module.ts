@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
-import { HomeComponent } from './home.component';
 import { CommonModule } from '@angular/common';
-import { CounterWrapperModule } from '../counter-wrapper/counter-wrapper.module';
+import { HomeComponent } from './home.component';
 import { RouterModule } from '@angular/router';
 import { TuiButtonModule } from '@taiga-ui/core';
 
@@ -10,14 +9,13 @@ import { TuiButtonModule } from '@taiga-ui/core';
         HomeComponent
     ],
     imports: [
-        CommonModule,   
-        CounterWrapperModule,
+        CommonModule,
         RouterModule,
         TuiButtonModule,
     ],
     exports: [
-        HomeComponent,
+      HomeComponent,
       ]
  })
 
-export class HomeModule { }
+export class MainPageModule { }
